@@ -1,0 +1,136 @@
+Thanks again for taking this on. The current URL (Joshtyrangiel.com — connected to Joshtyrangiel@gmail.com) is just a placeholder with a mildly creative bio treatment. What I need is a clean, clearly organized professional site that can evolve over time.
+
+Long term, the site should function as a central portal that:
+
+Showcases my journalism (Atlantic, WashPo, NYT, Bloomberg, etc.)
+
+Supports my book
+
+Provides bio + speaking information
+
+Links to my production company, Backstory Partners (BackstoryPartners.com — currently just a parked domain)
+
+Short term? The priority is book sales baby! Everything should quietly orient toward that goal.
+
+This is a rough functional outline — more thinking aloud. I trust you on execution and design. The goal is clarity, credibility, and ease of use.
+
+1. Homepage
+
+Header
+
+Name
+
+Tagline: Journalist | Producer | Author of AI for Good
+
+Hero Section
+
+Book cover
+
+Subtitle
+
+Release date
+
+Clear “Buy” buttons:
+
+Amazon
+
+IndieBound
+
+Bookshop
+
+Simon & Schuster
+(Open to tracking links if useful.)
+
+Primary Nav 
+
+Bio
+
+Book
+
+Journalism
+
+Speaking
+
+Media
+
+Backstory Partners
+
+Contact
+
+2. Bio Page
+
+Narrative bio (journalistic version)
+
+Possibly a shorter “executive” version
+
+Optional: visual timeline (Bloomberg → Atlantic → Book → Backstory, etc.)
+
+ 
+
+3. Book Page
+
+Synopsis
+
+Short excerpt
+
+Blurbers / press quotes (eventually)
+
+Purchase links (again, ideally trackable)
+
+Upcoming events (talks, interviews, launch events)
+
+Media assets:
+
+Press kit PDF
+
+Downloadable headshots
+
+Book cover files
+
+
+4. Journalism Page
+
+Clean logo bar (Atlantic, WashPo, NYtimes, Bloomberg, etc.)
+
+Featured pieces (curated, not exhaustive)
+
+
+5. Speaking Page
+
+Speaking headshot
+
+Short speaker bio
+
+Topics
+
+Link to my speaker’s agent
+
+6. Media / Press Page
+
+Podcast appearances
+
+TV interviews
+
+Video clips
+
+Longform profiles/interviews
+
+7. Backstory Partners Page
+
+Direct link to a separate one-screen site (logo attached):
+
+Short description of the company underneath hero logo
+
+Contact
+
+8. Contact Page
+
+Simple form (name, email, message type)
+
+Social icons (X/Twitter, LinkedIn)
+
+Substack signup
+
+Tonally, think it should be clean, restrained, editorial. Should feel like a writer’s site, not a startup landing page, so serious but contemporary. I’m a big Arial guy but you do you. And obvs, as easy to update as possible. I’d love basic tools to make light updates myself without breaking anything.
+
+This make sense? Let me know what you think and what I’m missing. And… thank you! I’m glad you will be the reason I finally do this!

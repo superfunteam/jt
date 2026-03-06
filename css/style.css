@@ -1,0 +1,557 @@
+/* ═══════════════════════════════════════════════════════════
+   JOSH TYRANGIEL — Typewriter Brutal
+   One font, two sizes, massive whitespace
+   ═══════════════════════════════════════════════════════════ */
+
+
+/* ── Design Tokens ──────────────────────────────────────── */
+
+:root {
+  --black: #1a1a1a;
+  --white: #ffffff;
+  --gray: #999;
+  --font: 'SUSE Mono', monospace;
+  --text-s: 13px;
+  --text-l: 20px;
+  --side-padding: 60px;
+  --section-gap: 200px;
+  --duration: 0.2s;
+}
+
+
+/* ── Reset & Base ───────────────────────────────────────── */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font);
+  font-weight: 400;
+  font-size: var(--text-s);
+  line-height: 1.8;
+  color: var(--black);
+  background-color: var(--white);
+  overflow-x: hidden;
+}
+
+/* Film grain — barely visible */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+  animation: grain 0.3s steps(1) infinite;
+}
+
+@keyframes grain {
+  0%   { background-position: 0 0; }
+  25%  { background-position: -128px 64px; }
+  50%  { background-position: 64px -128px; }
+  75%  { background-position: -64px 128px; }
+  100% { background-position: 128px -64px; }
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul {
+  list-style: none;
+}
+
+::selection {
+  background: var(--black);
+  color: var(--white);
+}
+
+
+/* ── Typography ─────────────────────────────────────────── */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font);
+  font-weight: 400;
+  font-size: var(--text-l);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  margin-bottom: 40px;
+}
+
+
+/* ── Links ──────────────────────────────────────────────── */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+
+/* ── Section Layout ─────────────────────────────────────── */
+
+.section {
+  position: relative;
+  padding: var(--section-gap) var(--side-padding);
+  border: none;
+}
+
+.section__inner {
+}
+
+.section__heading {
+  font-size: var(--text-l);
+  font-weight: 400;
+  margin-bottom: 40px;
+  letter-spacing: -0.01em;
+}
+
+.section__inner p {
+  margin-bottom: 24px;
+}
+
+.section__inner p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* ── Navigation ─────────────────────────────────────────── */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 50%;
+  z-index: 100;
+  padding: 20px var(--side-padding);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav__menu {
+  display: flex;
+  gap: 32px;
+}
+
+.nav__link {
+  font-family: var(--font);
+  font-size: var(--text-s);
+  font-weight: 400;
+  position: relative;
+}
+
+.nav__link:hover {
+  text-decoration: underline;
+}
+
+.nav__link--active {
+  text-decoration: underline;
+}
+
+.nav__toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.nav__toggle-bar {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+  transform-origin: center;
+}
+
+.nav__toggle--open .nav__toggle-bar:first-child {
+  transform: rotate(45deg) translate(2.5px, 2.5px);
+}
+
+.nav__toggle--open .nav__toggle-bar:last-child {
+  transform: rotate(-45deg) translate(2.5px, -2.5px);
+}
+
+
+/* ── Mobile Nav Overlay ─────────────────────────────────── */
+
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.nav-overlay--open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.nav-overlay__menu {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.nav-overlay__link {
+  font-family: var(--font);
+  font-size: var(--text-l);
+  font-weight: 400;
+}
+
+.nav-overlay__link:hover {
+  text-decoration: underline;
+}
+
+
+/* ── Hero ────────────────────────────────────────────────── */
+
+.section--hero {
+  padding: 0;
+  min-height: 100vh;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+.hero__text {
+  padding: 60px;
+  padding-top: calc(60px + 2rem);
+}
+
+.hero__intro {
+  font-size: var(--text-s);
+  line-height: 1.8;
+}
+
+.hero__intro strong {
+  font-weight: 700;
+}
+
+.hero__intro em {
+  font-style: italic;
+}
+
+.hero__intro a {
+  text-decoration: underline;
+}
+
+.hero__photo {
+  height: 100%;
+  overflow: hidden;
+}
+
+.hero__photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* ── Book Section ────────────────────────────────────────── */
+
+.book-content p {
+  margin-bottom: 24px;
+}
+
+.book-cover {
+  position: relative;
+  width: 240px;
+  margin-left: auto;
+  margin-right: -120px;
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+
+.book-cover__img {
+  width: 100%;
+  height: auto;
+}
+
+blockquote {
+  font-style: italic;
+  padding-left: 40px;
+  margin: 40px 0;
+  color: var(--gray);
+}
+
+.book-praise {
+  margin: 40px 0;
+}
+
+.book-praise p {
+  margin-bottom: 24px;
+  font-style: italic;
+  color: var(--gray);
+}
+
+.cite {
+  font-style: normal;
+  color: var(--gray);
+}
+
+.book-buy {
+  margin: 40px 0;
+}
+
+.book-events {
+  margin: 40px 0;
+}
+
+.cv {
+  margin-top: 40px;
+  padding-left: 40px;
+}
+
+
+/* ── Article / Media Lists ───────────────────────────────── */
+
+.article-list p,
+.media-list p {
+  margin-bottom: 24px;
+}
+
+
+/* ── Speaking Photo ──────────────────────────────────────── */
+
+.speaking-photo {
+  width: 300px;
+  margin-left: -80px;
+  margin-bottom: 40px;
+}
+
+.speaking-photo__img {
+  width: 100%;
+  height: auto;
+}
+
+
+/* ── Backstory — Dark Section ────────────────────────────── */
+
+.section--dark {
+  background: var(--black);
+  color: var(--white);
+}
+
+.section--dark a:hover {
+  color: var(--gray);
+  text-decoration: underline;
+}
+
+
+/* ── Contact Form ────────────────────────────────────────── */
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-bottom: 40px;
+}
+
+.form-field label {
+  display: block;
+  color: var(--gray);
+  margin-bottom: 4px;
+  font-size: var(--text-s);
+  font-family: var(--font);
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  font-family: var(--font);
+  font-size: var(--text-s);
+  color: var(--black);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--gray);
+  padding: 8px 0;
+  outline: none;
+  border-radius: 0;
+  -webkit-appearance: none;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-bottom-color: var(--black);
+}
+
+.form-field textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-field select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='%23999' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0 center;
+  padding-right: 24px;
+}
+
+.form-submit {
+  font-family: var(--font);
+  font-size: var(--text-s);
+  background: none;
+  border: none;
+  color: var(--black);
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-align: left;
+}
+
+.form-submit:hover {
+  color: var(--gray);
+}
+
+.contact-links {
+  margin-top: 40px;
+}
+
+
+/* ── Footer ──────────────────────────────────────────────── */
+
+.site-footer {
+  padding: 40px var(--side-padding);
+}
+
+.site-footer__inner {
+}
+
+.site-footer__copy {
+  font-family: var(--font);
+  font-size: var(--text-s);
+  color: var(--gray);
+}
+
+
+/* ── Animation: Initial States ───────────────────────────── */
+
+.anim-reveal {
+  opacity: 0;
+}
+
+.anim-fade {
+  opacity: 0;
+}
+
+.hero__photo {
+  opacity: 0;
+}
+
+
+/* ── Responsive: Tablet ──────────────────────────────────── */
+
+@media (max-width: 1200px) {
+  .site-header {
+    width: 100%;
+    mix-blend-mode: difference;
+    color: var(--white);
+  }
+
+  .nav {
+    justify-content: flex-end;
+  }
+
+  .nav__menu {
+    display: none;
+  }
+
+  .nav__toggle {
+    display: flex;
+  }
+}
+
+
+/* ── Responsive: Mobile ──────────────────────────────────── */
+
+@media (max-width: 768px) {
+  :root {
+    --side-padding: 24px;
+    --section-gap: 120px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__text {
+    padding: 80px 24px 40px;
+  }
+
+  .hero__photo {
+    height: 60vh;
+  }
+
+  .book-cover {
+    margin-right: 0;
+    width: 180px;
+  }
+
+  .speaking-photo {
+    margin-left: 0;
+    width: 200px;
+  }
+}
+
+
+/* ── Reduced Motion ──────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  body::after {
+    display: none;
+  }
+
+  .anim-reveal,
+  .anim-fade,
+  .hero__photo {
+    opacity: 1;
+    transform: none;
+  }
+}
