@@ -57,27 +57,44 @@ const Animations = (() => {
     });
   }
 
-  /* ── Text Reveals — simple fade, no word splitting ─────── */
+  /* ── Text Reveals — typewriter effect with blinking cursor */
 
   function textReveals() {
     const headings = document.querySelectorAll('.anim-reveal');
 
     headings.forEach((heading) => {
-      gsap.set(heading, { opacity: 1 });
+      const fullText = heading.textContent;
+      heading.textContent = '';
+      heading.style.opacity = '1';
+      heading.classList.add('typewriter-cursor');
 
-      gsap.fromTo(heading,
-        { opacity: 0 },
-        {
-          opacity: 1,
-          duration: 0.4,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: heading,
-            start: 'top 75%',
-            once: true,
-          },
-        }
-      );
+      let triggered = false;
+
+      ScrollTrigger.create({
+        trigger: heading,
+        start: 'top 75%',
+        once: true,
+        onEnter: () => {
+          if (triggered) return;
+          triggered = true;
+          let i = 0;
+          const speed = 40;
+
+          function type() {
+            if (i < fullText.length) {
+              heading.textContent += fullText.charAt(i);
+              i++;
+              setTimeout(type, speed);
+            } else {
+              // One extra blink then hide
+              setTimeout(() => {
+                heading.classList.remove('typewriter-cursor');
+              }, 600);
+            }
+          }
+          type();
+        },
+      });
     });
   }
 
@@ -94,39 +111,43 @@ const Animations = (() => {
           trigger: '.section--hero',
           start: 'top top',
           end: 'bottom top',
-          scrub: 0.3,
+          scrub: 0.15,
         },
       });
     }
 
-    // Book cover — medium drift
-    const bookCover = document.querySelector('.book-cover__img');
+    // Book cover — slow gentle drift
+    const bookCover = document.querySelector('.book-layout__cover');
     if (bookCover) {
       gsap.to(bookCover, {
-        y: 40,
+        y: 30,
         ease: 'none',
         scrollTrigger: {
-          trigger: '.book-cover',
+          trigger: '.book-layout',
           start: 'top bottom',
           end: 'bottom top',
-          scrub: 0.6,
+          scrub: 0.25,
         },
       });
     }
 
-    // Speaking headshot — faster drift
-    const speakingPhoto = document.querySelector('.speaking-photo__img');
+
+    // Speaking headshot — scrolls faster than surroundings, starts low
+    const speakingPhoto = document.querySelector('.speaking-grid__photo');
     if (speakingPhoto) {
-      gsap.to(speakingPhoto, {
-        y: 50,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: '.speaking-photo',
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 0.9,
-        },
-      });
+      gsap.fromTo(speakingPhoto,
+        { y: 300 },
+        {
+          y: 140,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '#speaking',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 0.15,
+          },
+        }
+      );
     }
   }
 
