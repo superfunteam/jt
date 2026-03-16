@@ -189,6 +189,10 @@ a:hover {
 }
 
 
+.nav__select {
+  display: none;
+}
+
 .nav__toggle {
   display: none;
   flex-direction: column;
@@ -436,6 +440,12 @@ blockquote {
   color: var(--white);
 }
 
+.backstory-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
 .backstory-logo {
   max-width: 140px;
   height: auto;
@@ -586,12 +596,15 @@ blockquote {
 @media (max-width: 1200px) {
   .site-header {
     width: 100%;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
     mix-blend-mode: difference;
     color: var(--white);
   }
 
-  .nav {
-    justify-content: flex-end;
+  .site-header__name {
+    margin-bottom: 0;
   }
 
   .nav__menu {
@@ -599,7 +612,26 @@ blockquote {
   }
 
   .nav__toggle {
-    display: flex;
+    display: none;
+  }
+
+  .nav__select {
+    display: block;
+    appearance: none;
+    -webkit-appearance: none;
+    background: none;
+    border: none;
+    color: inherit;
+    font-family: var(--font);
+    font-size: var(--text-s);
+    font-weight: 400;
+    cursor: pointer;
+    padding: 0;
+    text-align: right;
+  }
+
+  .nav__select:focus {
+    outline: none;
   }
 }
 

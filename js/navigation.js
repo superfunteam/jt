@@ -22,6 +22,7 @@ const Navigation = (() => {
   function init() {
     setupScrollSpy();
     setupMobileMenu();
+    setupMobileSelect();
     setupSmoothNavLinks();
     setupHeaderBackground();
     handlePopState();
@@ -64,6 +65,10 @@ const Navigation = (() => {
     document.querySelectorAll('.nav__link').forEach((link) => {
       link.classList.toggle('nav__link--active', link.dataset.section === id);
     });
+
+    // Update mobile select
+    const select = document.querySelector('.nav__select');
+    if (select) select.value = id;
 
     // Update URL with clean path (no reload)
     const newPath = sectionToPath(id);
@@ -136,6 +141,23 @@ const Navigation = (() => {
       link.addEventListener('click', () => {
         if (isMenuOpen) closeMenu();
       });
+    });
+  }
+
+  /* ── Mobile Select Nav ──────────────────────────────── */
+
+  function setupMobileSelect() {
+    const select = document.querySelector('.nav__select');
+    if (!select) return;
+
+    select.addEventListener('change', () => {
+      const sectionId = select.value;
+      const target = document.getElementById(sectionId);
+      if (!target) return;
+
+      const newPath = sectionToPath(sectionId);
+      history.pushState({ section: sectionId }, '', newPath);
+      SmoothScroll.scrollTo(target, { offset: -HEADER_OFFSET });
     });
   }
 
