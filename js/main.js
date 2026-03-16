@@ -22,7 +22,7 @@
     setupContactForm();
 
     // 5. Smooth image fade-in on load
-    document.querySelectorAll('img').forEach((img) => {
+    document.querySelectorAll('img:not(.hero__photo-img)').forEach((img) => {
       if (img.complete) {
         requestAnimationFrame(() => img.classList.add('is-loaded'));
       } else {

@@ -46,11 +46,24 @@ const Animations = (() => {
               { opacity: 0 },
               { opacity: 1, duration: 0.4 }
             );
-            tl.fromTo('.hero__photo',
-              { opacity: 0 },
-              { opacity: 1, duration: 0.6 },
-              0.2
-            );
+
+            // Animate the <img> directly — GSAP is the single opacity controller
+            const heroImg = document.querySelector('.hero__photo-img');
+            if (heroImg) {
+              const fadeInImg = () => {
+                tl.fromTo(heroImg,
+                  { opacity: 0 },
+                  { opacity: 1, duration: 0.6 },
+                  0.2
+                );
+              };
+              if (heroImg.complete) {
+                fadeInImg();
+              } else {
+                heroImg.addEventListener('load', fadeInImg);
+                heroImg.addEventListener('error', fadeInImg);
+              }
+            }
           }, 600);
         }
       }
@@ -62,7 +75,7 @@ const Animations = (() => {
   /* ── Scroll Reveals — opacity only, no Y translation ───── */
 
   function scrollReveals() {
-    const elements = document.querySelectorAll('.anim-fade');
+    const elements = document.querySelectorAll('.anim-fade:not(.hero__intro)');
 
     elements.forEach((el) => {
       gsap.fromTo(el,
