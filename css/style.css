@@ -457,6 +457,11 @@ blockquote {
   text-decoration: underline;
 }
 
+.backstory-link:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
 
 /* ── Contact Form ────────────────────────────────────────── */
 
