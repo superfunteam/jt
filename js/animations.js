@@ -21,18 +21,42 @@ const Animations = (() => {
   /* ── Hero — simple opacity, line by line ────────────────── */
 
   function heroSequence() {
-    const tl = gsap.timeline({ delay: 0.15 });
+    // Typewrite the site name first
+    const siteName = document.querySelector('.site-header__name');
+    if (siteName) {
+      const fullText = siteName.textContent;
+      siteName.textContent = '';
+      siteName.style.opacity = '1';
+      siteName.classList.add('typewriter-cursor');
 
-    tl.fromTo('.hero__intro',
-      { opacity: 0 },
-      { opacity: 1, duration: 0.4 }
-    );
+      let i = 0;
+      const speed = 40;
 
-    tl.fromTo('.hero__photo',
-      { opacity: 0 },
-      { opacity: 1, duration: 0.6 },
-      0.2
-    );
+      function typeName() {
+        if (i < fullText.length) {
+          siteName.textContent += fullText.charAt(i);
+          i++;
+          setTimeout(typeName, speed);
+        } else {
+          setTimeout(() => {
+            siteName.classList.remove('typewriter-cursor');
+            // Fade in hero content after name finishes
+            const tl = gsap.timeline();
+            tl.fromTo('.hero__intro',
+              { opacity: 0 },
+              { opacity: 1, duration: 0.4 }
+            );
+            tl.fromTo('.hero__photo',
+              { opacity: 0 },
+              { opacity: 1, duration: 0.6 },
+              0.2
+            );
+          }, 600);
+        }
+      }
+
+      setTimeout(typeName, 150);
+    }
   }
 
   /* ── Scroll Reveals — opacity only, no Y translation ───── */

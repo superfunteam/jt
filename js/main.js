@@ -21,6 +21,16 @@
     // 4. Contact form — inline confirmation
     setupContactForm();
 
+    // 5. Smooth image fade-in on load
+    document.querySelectorAll('img').forEach((img) => {
+      if (img.complete) {
+        requestAnimationFrame(() => img.classList.add('is-loaded'));
+      } else {
+        img.addEventListener('load', () => img.classList.add('is-loaded'));
+        img.addEventListener('error', () => img.classList.add('is-loaded'));
+      }
+    });
+
     // Handle initial URL path (e.g. /book, /bio)
     setTimeout(() => {
       Navigation.scrollToCurrentPath();
