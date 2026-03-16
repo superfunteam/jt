@@ -150,6 +150,17 @@ const Navigation = (() => {
     const select = document.querySelector('.nav__select');
     if (!select) return;
 
+    // Hide until user reaches the book section
+    const book = document.getElementById('book');
+    if (book) {
+      ScrollTrigger.create({
+        trigger: book,
+        start: 'top 80%',
+        onEnter: () => select.classList.add('nav__select--visible'),
+        onLeaveBack: () => select.classList.remove('nav__select--visible'),
+      });
+    }
+
     select.addEventListener('change', () => {
       const sectionId = select.value;
       const target = document.getElementById(sectionId);
