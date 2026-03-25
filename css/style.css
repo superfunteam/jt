@@ -15,6 +15,7 @@
   --text-l: 20px;
   --side-padding: 60px;
   --section-gap: 200px;
+  --blue: #0000ff;
   --duration: 0.2s;
 }
 
@@ -84,10 +85,13 @@ h1, h2, h3, h4, h5, h6 {
 a {
   color: inherit;
   text-decoration: none;
+  text-decoration-color: var(--blue);
+  text-underline-offset: 2px;
 }
 
 a:hover {
   text-decoration: underline;
+  text-decoration-color: var(--blue);
 }
 
 
@@ -182,10 +186,12 @@ a:hover {
 
 .nav__link:hover {
   text-decoration: underline;
+  text-decoration-color: #ffff00;
 }
 
 .nav__link--active {
   text-decoration: underline;
+  text-decoration-color: #ffff00;
 }
 
 
@@ -259,6 +265,7 @@ a:hover {
 
 .nav-overlay__link:hover {
   text-decoration: underline;
+  text-decoration-color: var(--blue);
 }
 
 
@@ -297,6 +304,7 @@ a:hover {
 
 .hero__intro a {
   text-decoration: underline;
+  text-decoration-color: var(--blue);
 }
 
 .hero__photo {
@@ -368,6 +376,7 @@ blockquote {
 
 .book-buy a {
   text-decoration: underline;
+  text-decoration-color: var(--blue);
 }
 
 .book-events {
@@ -380,6 +389,7 @@ blockquote {
 
 .book-media a {
   text-decoration: underline;
+  text-decoration-color: var(--blue);
 }
 
 .cv {
@@ -455,8 +465,10 @@ blockquote {
 .section--dark a:hover {
   color: var(--gray);
   text-decoration: underline;
+  text-decoration-color: var(--blue);
 }
 
+#backstory a:hover,
 .backstory-link:hover {
   color: inherit;
   text-decoration: none;
@@ -524,6 +536,8 @@ blockquote {
   cursor: pointer;
   padding: 0;
   text-decoration: underline;
+  text-decoration-color: var(--blue);
+  text-underline-offset: 2px;
   text-align: left;
 }
 
