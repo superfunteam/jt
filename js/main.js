@@ -31,10 +31,6 @@
       }
     });
 
-    // Handle initial URL path (e.g. /book, /bio)
-    setTimeout(() => {
-      Navigation.scrollToCurrentPath();
-    }, 100);
   }
 
   function setupContactForm() {
@@ -100,8 +96,9 @@
     initAll();
   }
 
-  // Refresh ScrollTrigger on full load (images, fonts)
+  // Refresh ScrollTrigger on full load (images, fonts), then scroll to path
   window.addEventListener('load', () => {
     ScrollTrigger.refresh();
+    Navigation.scrollToCurrentPath();
   });
 })();
