@@ -83,6 +83,42 @@ function richContent(s) {
   return parts.join('').trim();
 }
 
+// ─── Extract meta fields from <head> ───
+
+const metaFields = {};
+
+// <title>...</title>
+const titleMatch = html.match(/<title>([^<]*)<\/title>/);
+if (titleMatch) metaFields.title = decode(titleMatch[1]);
+
+// <meta name="description" content="...">
+const descMatch = html.match(/<meta\s+name="description"\s+content="([^"]*)"/);
+if (descMatch) metaFields.description = decode(descMatch[1]);
+
+// <meta property="og:title" content="...">
+const ogTitleMatch = html.match(/<meta\s+property="og:title"\s+content="([^"]*)"/);
+if (ogTitleMatch) metaFields.ogTitle = decode(ogTitleMatch[1]);
+
+// <meta property="og:description" content="...">
+const ogDescMatch = html.match(/<meta\s+property="og:description"\s+content="([^"]*)"/);
+if (ogDescMatch) metaFields.ogDescription = decode(ogDescMatch[1]);
+
+// <meta property="og:image" content="...">
+const ogImageMatch = html.match(/<meta\s+property="og:image"\s+content="([^"]*)"/);
+if (ogImageMatch) metaFields.ogImage = decode(ogImageMatch[1]);
+
+// <meta name="twitter:card" content="...">
+const twCardMatch = html.match(/<meta\s+name="twitter:card"\s+content="([^"]*)"/);
+if (twCardMatch) metaFields.twitterCard = decode(twCardMatch[1]);
+
+// <meta property="og:url" content="...">
+const ogUrlMatch = html.match(/<meta\s+property="og:url"\s+content="([^"]*)"/);
+if (ogUrlMatch) metaFields.siteUrl = decode(ogUrlMatch[1]);
+
+// <meta property="og:site_name" content="...">
+const ogSiteMatch = html.match(/<meta\s+property="og:site_name"\s+content="([^"]*)"/);
+if (ogSiteMatch) metaFields.siteName = decode(ogSiteMatch[1]);
+
 // ─── Extract all data-adlib-cms elements ───
 
 const content = {};
@@ -377,6 +413,20 @@ if (content.footer) {
   const f = content.footer;
   content.footer = {
     copy: f.copy
+  };
+}
+
+// Attach meta from <head> extraction
+if (Object.keys(metaFields).length > 0) {
+  content.meta = {
+    title: metaFields.title || '',
+    description: metaFields.description || '',
+    ogTitle: metaFields.ogTitle || '',
+    ogDescription: metaFields.ogDescription || '',
+    ogImage: metaFields.ogImage || '',
+    twitterCard: metaFields.twitterCard || '',
+    siteUrl: metaFields.siteUrl || '',
+    siteName: metaFields.siteName || ''
   };
 }
 

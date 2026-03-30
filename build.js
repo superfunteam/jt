@@ -51,7 +51,7 @@ function richEsc(s) {
 }
 
 /* ── Destructure content ── */
-const { hero, book, bio, journalism, speaking, media, backstory, contact, footer } = content;
+const { hero, book, bio, journalism, speaking, media, backstory, contact, footer, meta } = content;
 
 /* ── Build HTML ── */
 const html = `<!DOCTYPE html>
@@ -59,27 +59,27 @@ const html = `<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Josh Tyrangiel — Journalist, Producer, Author of AI for Good</title>
-  <meta name="description" content="Josh Tyrangiel is a journalist, producer, and author of AI for Good (Simon &amp; Schuster). Former head of Bloomberg Media and editorial director of The Atlantic.">
+  <title>${esc(meta.title)}</title>
+  <meta name="description" content="${esc(meta.description)}">
 
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231a1a1a'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='16' font-weight='700' fill='%23f7f7f7' text-anchor='middle'%3EJT%3C/text%3E%3C/svg%3E" type="image/svg+xml">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Josh Tyrangiel — Author of AI for Good">
-  <meta property="og:description" content="Journalist, producer, and author. AI for Good — now available from Simon &amp; Schuster.">
+  <meta property="og:title" content="${esc(meta.ogTitle)}">
+  <meta property="og:description" content="${esc(meta.ogDescription)}">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://joshtyrangiel.com">
-  <meta property="og:image" content="https://joshtyrangiel.com/assets/images/unfurl.jpg">
+  <meta property="og:url" content="${esc(meta.siteUrl)}">
+  <meta property="og:image" content="${esc(meta.ogImage)}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:site_name" content="Josh Tyrangiel">
+  <meta property="og:site_name" content="${esc(meta.siteName)}">
 
   <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Josh Tyrangiel — Author of AI for Good">
-  <meta name="twitter:description" content="Journalist, producer, and author. AI for Good — now available from Simon &amp; Schuster.">
-  <meta name="twitter:image" content="https://joshtyrangiel.com/assets/images/unfurl.jpg">
+  <meta name="twitter:card" content="${esc(meta.twitterCard)}">
+  <meta name="twitter:title" content="${esc(meta.ogTitle)}">
+  <meta name="twitter:description" content="${esc(meta.ogDescription)}">
+  <meta name="twitter:image" content="${esc(meta.ogImage)}">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">

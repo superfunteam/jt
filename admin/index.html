@@ -188,7 +188,7 @@
       border-radius: 6px;
       background: #fff;
       min-height: 120px;
-      overflow: hidden;
+      overflow: visible;
     }
     .quill-wrap .ql-editor { min-height: 100px; font-size: .95rem; font-family: 'Helvetica Neue', Arial, sans-serif; }
     .quill-wrap .ql-editor p { margin-bottom: .5em; }
@@ -329,6 +329,7 @@
       <button data-section="backstory">Backstory</button>
       <button data-section="contact">Contact</button>
       <button data-section="footer">Footer</button>
+      <button data-section="meta">SEO / Meta</button>
     </nav>
     <div class="sidebar-footer">
       <button onclick="logout()">Sign Out</button>
@@ -369,16 +370,8 @@
           <input type="text" data-field="book.heading">
         </div>
         <div class="field">
-          <label>Synopsis Paragraph 1</label>
-          <div class="quill-wrap" id="quill-book-synopsis-0"></div>
-        </div>
-        <div class="field">
-          <label>Synopsis Paragraph 2</label>
-          <div class="quill-wrap" id="quill-book-synopsis-1"></div>
-        </div>
-        <div class="field">
-          <label>Synopsis Paragraph 3</label>
-          <div class="quill-wrap" id="quill-book-synopsis-2"></div>
+          <label>Synopsis</label>
+          <div class="quill-wrap" id="quill-book-synopsis"></div>
         </div>
         <div class="field">
           <label>Press Praise</label>
@@ -409,20 +402,8 @@
           <input type="text" data-field="bio.heading">
         </div>
         <div class="field">
-          <label>Paragraph 1</label>
-          <div class="quill-wrap" id="quill-bio-paragraphs-0"></div>
-        </div>
-        <div class="field">
-          <label>Paragraph 2</label>
-          <div class="quill-wrap" id="quill-bio-paragraphs-1"></div>
-        </div>
-        <div class="field">
-          <label>Paragraph 3</label>
-          <div class="quill-wrap" id="quill-bio-paragraphs-2"></div>
-        </div>
-        <div class="field">
-          <label>Paragraph 4</label>
-          <div class="quill-wrap" id="quill-bio-paragraphs-3"></div>
+          <label>Bio</label>
+          <div class="quill-wrap" id="quill-bio-paragraphs"></div>
         </div>
         <h3 class="dyn-heading">CV</h3>
         <div id="cv-container"></div>
@@ -438,7 +419,7 @@
         </div>
         <div class="field">
           <label>Outlets</label>
-          <input type="text" data-field="journalism.outlets">
+          <textarea data-field="journalism.outlets"></textarea>
         </div>
         <h3 class="dyn-heading">Articles</h3>
         <div id="articles-container"></div>
@@ -525,6 +506,48 @@
         </div>
       </div>
 
+      <!-- SEO / META -->
+      <div class="section-panel" data-panel="meta">
+        <p class="section-desc">Page title, description, and social sharing tags</p>
+        <div class="field">
+          <label>Page Title</label>
+          <input type="text" data-field="meta.title">
+        </div>
+        <div class="field">
+          <label>Meta Description</label>
+          <textarea data-field="meta.description"></textarea>
+        </div>
+        <div class="field">
+          <label>OG Title</label>
+          <input type="text" data-field="meta.ogTitle">
+        </div>
+        <div class="field">
+          <label>OG Description</label>
+          <textarea data-field="meta.ogDescription"></textarea>
+        </div>
+        <div class="field">
+          <label>OG Image URL</label>
+          <input type="text" data-field="meta.ogImage">
+        </div>
+        <div class="image-upload" id="og-image-upload">
+          <label>OG Image Upload</label>
+          <div id="og-image-preview-wrap"></div>
+          <input type="file" accept="image/*" onchange="handleOgImageUpload(this)">
+        </div>
+        <div class="field">
+          <label>Twitter Card Type</label>
+          <input type="text" data-field="meta.twitterCard">
+        </div>
+        <div class="field">
+          <label>Site URL</label>
+          <input type="text" data-field="meta.siteUrl">
+        </div>
+        <div class="field">
+          <label>Site Name</label>
+          <input type="text" data-field="meta.siteName">
+        </div>
+      </div>
+
     </div><!-- .content-area -->
   </div><!-- .main -->
 </div><!-- #admin-shell -->
@@ -606,6 +629,26 @@ function cleanQuillHTML(id) {
   return html.trim();
 }
 
+function cleanQuillHTMLMulti(id) {
+  const q = quillInstances[id];
+  if (!q) return [];
+  let html = q.root.innerHTML;
+  if (html === '<p><br></p>' || html === '<p></p>') return [];
+  // Split into paragraphs — Quill wraps each in <p>...</p>
+  // Remove leading <p> and trailing </p>, then split on </p><p>
+  html = html.replace(/^<p>/, '').replace(/<\/p>$/, '');
+  const parts = html.split(/<\/p>\s*<p>/);
+  return parts
+    .map(p => {
+      // Skip empty paragraphs
+      if (p === '<br>' || p.trim() === '') return null;
+      // Normalize link output
+      p = p.replace(/<a href="([^"]*)"[^>]*>/g, '<a href="$1" target="_blank">');
+      return p.trim();
+    })
+    .filter(Boolean);
+}
+
 /* ============================================================
    STATUS
    ============================================================ */
@@ -680,7 +723,7 @@ function showSection(name) {
   const titles = {
     hero:'Hero', book:'Book', bio:'Bio', journalism:'Journalism',
     speaking:'Speaking', media:'Media', backstory:'Backstory',
-    contact:'Contact', footer:'Footer'
+    contact:'Contact', footer:'Footer', meta:'SEO / Meta'
   };
   document.getElementById('topbar-title').textContent = titles[name] || name;
 }
@@ -703,14 +746,13 @@ function populateForms() {
 
   // Quill editors
   loadIntoQuill('quill-hero-intro', content.hero.intro);
-  loadIntoQuill('quill-book-synopsis-0', content.book.synopsis[0]);
-  loadIntoQuill('quill-book-synopsis-1', content.book.synopsis[1]);
-  loadIntoQuill('quill-book-synopsis-2', content.book.synopsis[2]);
+  // Combined synopsis: join paragraphs as separate <p> blocks
+  loadIntoQuill('quill-book-synopsis',
+    content.book.synopsis.map(p => '<p>' + p + '</p>').join(''));
   loadIntoQuill('quill-book-mediaAssets', content.book.mediaAssets);
-  loadIntoQuill('quill-bio-paragraphs-0', content.bio.paragraphs[0]);
-  loadIntoQuill('quill-bio-paragraphs-1', content.bio.paragraphs[1]);
-  loadIntoQuill('quill-bio-paragraphs-2', content.bio.paragraphs[2]);
-  loadIntoQuill('quill-bio-paragraphs-3', content.bio.paragraphs[3]);
+  // Combined bio: join paragraphs as separate <p> blocks
+  loadIntoQuill('quill-bio-paragraphs',
+    content.bio.paragraphs.map(p => '<p>' + p + '</p>').join(''));
   loadIntoQuill('quill-speaking-inquiryCta', content.speaking.inquiryCta);
 
   // Dynamic sections
@@ -727,6 +769,7 @@ function populateForms() {
   renderBookCover();
   renderSpeakingImage();
   renderBackstoryLogo();
+  renderOgImage();
 }
 
 /* ============================================================
@@ -856,6 +899,42 @@ function renderBackstoryLogo() {
   wrap.innerHTML = src ? `<img class="image-preview" src="/${escAttr(src)}?_=${Date.now()}" alt="Backstory logo">` : '';
 }
 
+function renderOgImage() {
+  const wrap = document.getElementById('og-image-preview-wrap');
+  if (!wrap || !content.meta) return;
+  const src = content.meta.ogImage;
+  // Only show preview for relative paths (uploaded images), not full URLs
+  if (src && !src.startsWith('http')) {
+    wrap.innerHTML = `<img class="image-preview" src="/${escAttr(src)}?_=${Date.now()}" alt="OG image">`;
+  } else if (src) {
+    wrap.innerHTML = `<img class="image-preview" src="${escAttr(src)}" alt="OG image">`;
+  } else {
+    wrap.innerHTML = '';
+  }
+}
+
+function handleOgImageUpload(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const uploadPath = 'assets/images/unfurl.jpg';
+
+  // Preview immediately
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const wrap = document.getElementById('og-image-preview-wrap');
+    wrap.innerHTML = `<img class="image-preview" src="${e.target.result}" alt="Preview">`;
+  };
+  reader.readAsDataURL(file);
+
+  // Update the URL field to the local path and queue upload
+  content.meta.ogImage = 'https://joshtyrangiel.com/' + uploadPath;
+  const urlInput = document.querySelector('[data-field="meta.ogImage"]');
+  if (urlInput) urlInput.value = content.meta.ogImage;
+
+  pendingImages = pendingImages.filter(p => p.path !== uploadPath);
+  pendingImages.push({ path: uploadPath, file: file, fieldPath: 'meta.ogImage' });
+}
+
 /* ============================================================
    IMAGE UPLOAD HANDLER
    ============================================================ */
@@ -890,14 +969,9 @@ function gatherContent() {
 
   // Quill editors
   content.hero.intro = cleanQuillHTML('quill-hero-intro');
-  content.book.synopsis[0] = cleanQuillHTML('quill-book-synopsis-0');
-  content.book.synopsis[1] = cleanQuillHTML('quill-book-synopsis-1');
-  content.book.synopsis[2] = cleanQuillHTML('quill-book-synopsis-2');
+  content.book.synopsis = cleanQuillHTMLMulti('quill-book-synopsis');
   content.book.mediaAssets = cleanQuillHTML('quill-book-mediaAssets');
-  content.bio.paragraphs[0] = cleanQuillHTML('quill-bio-paragraphs-0');
-  content.bio.paragraphs[1] = cleanQuillHTML('quill-bio-paragraphs-1');
-  content.bio.paragraphs[2] = cleanQuillHTML('quill-bio-paragraphs-2');
-  content.bio.paragraphs[3] = cleanQuillHTML('quill-bio-paragraphs-3');
+  content.bio.paragraphs = cleanQuillHTMLMulti('quill-bio-paragraphs');
   content.speaking.inquiryCta = cleanQuillHTML('quill-speaking-inquiryCta');
 
   // Dynamic arrays are already mutated in-place via oninput handlers

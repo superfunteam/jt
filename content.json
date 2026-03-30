@@ -201,5 +201,15 @@
   },
   "footer": {
     "copy": "© 2026 Josh Tyrangiel. All rights reserved."
+  },
+  "meta": {
+    "title": "Josh Tyrangiel — Journalist, Producer, Author of AI for Good",
+    "description": "Josh Tyrangiel is a journalist, producer, and author of AI for Good (Simon & Schuster). Former head of Bloomberg Media and editorial director of The Atlantic.",
+    "ogTitle": "Josh Tyrangiel — Author of AI for Good",
+    "ogDescription": "Journalist, producer, and author. AI for Good — now available from Simon & Schuster.",
+    "ogImage": "https://joshtyrangiel.com/assets/images/unfurl.jpg",
+    "twitterCard": "summary_large_image",
+    "siteUrl": "https://joshtyrangiel.com",
+    "siteName": "Josh Tyrangiel"
   }
 }
