@@ -903,11 +903,12 @@ function renderOgImage() {
   const wrap = document.getElementById('og-image-preview-wrap');
   if (!wrap || !content.meta) return;
   const src = content.meta.ogImage;
-  // Only show preview for relative paths (uploaded images), not full URLs
-  if (src && !src.startsWith('http')) {
-    wrap.innerHTML = `<img class="image-preview" src="/${escAttr(src)}?_=${Date.now()}" alt="OG image">`;
-  } else if (src) {
-    wrap.innerHTML = `<img class="image-preview" src="${escAttr(src)}" alt="OG image">`;
+  if (src) {
+    // Absolute paths (/assets/...) and full URLs (https://...) work as-is
+    const imgSrc = src.startsWith('/') || src.startsWith('http')
+      ? `${escAttr(src)}?_=${Date.now()}`
+      : `/${escAttr(src)}?_=${Date.now()}`;
+    wrap.innerHTML = `<img class="image-preview" src="${imgSrc}" alt="OG image">`;
   } else {
     wrap.innerHTML = '';
   }
