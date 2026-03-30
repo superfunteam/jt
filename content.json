@@ -1,0 +1,205 @@
+{
+  "hero": {
+    "intro": "<strong>Josh Tyrangiel</strong> is a journalist, producer, and author. He has led newsrooms at <a href=\"https://www.bloomberg.com\" target=\"_blank\">Bloomberg</a>, <a href=\"https://www.theatlantic.com\" target=\"_blank\">The Atlantic</a>, and <a href=\"https://time.com\" target=\"_blank\">Time</a>, and spent three decades covering the intersection of technology, culture, and power. His book <strong><em>AI for Good</em></strong> is published by <a href=\"https://www.simonandschuster.com/?utm_source=joshtyrangiel&amp;utm_medium=website&amp;utm_campaign=book_launch\" target=\"_blank\">Simon & Schuster</a> in 2026. Available at <a href=\"https://www.amazon.com/?utm_source=joshtyrangiel&amp;utm_medium=website&amp;utm_campaign=book_launch\" target=\"_blank\">Amazon</a>, <a href=\"https://bookshop.org/?utm_source=joshtyrangiel&amp;utm_medium=website&amp;utm_campaign=book_launch\" target=\"_blank\">Bookshop</a>, <a href=\"https://www.indiebound.org/?utm_source=joshtyrangiel&amp;utm_medium=website&amp;utm_campaign=book_launch\" target=\"_blank\">IndieBound</a>.",
+    "image": "assets/images/hero-2.webp"
+  },
+  "book": {
+    "heading": "AI for Good",
+    "synopsis": [
+      "This isn't a book about high-profile tech CEOs who want to use AI to \"break shit.\" It's about smart pragmatists using AI to make the world better — teachers, doctors, bureaucrats who stumbled into it as a way to solve specific, tangible problems.",
+      "Josh Tyrangiel's journey into AI began with a late-night YouTube video featuring the retired four-star general who ran Covid vaccine distribution during Operation Warp Speed. The success of that effort depended on AI's ability to synthesize vast amounts of logistical data. AI wasn't the hero — it was the tool that helped real people get things done.",
+      "<em>AI for Good</em> follows those people. It explores AI's quiet revolution in government, medicine, education, and human connection — places where it amplifies human judgment rather than replaces it. Success isn't guaranteed. Change is hard. Institutions move slowly. But even in failure there are lessons for anyone interested in using AI carefully to build a better world today."
+    ],
+    "praise": "Press quotes TK",
+    "buyLinks": [
+      {
+        "label": "Amazon",
+        "url": "https://www.amazon.com/?utm_source=joshtyrangiel&utm_medium=website&utm_campaign=book_section"
+      },
+      {
+        "label": "Bookshop",
+        "url": "https://bookshop.org/?utm_source=joshtyrangiel&utm_medium=website&utm_campaign=book_section"
+      },
+      {
+        "label": "IndieBound",
+        "url": "https://www.indiebound.org/?utm_source=joshtyrangiel&utm_medium=website&utm_campaign=book_section"
+      },
+      {
+        "label": "Simon & Schuster",
+        "url": "https://www.simonandschuster.com/?utm_source=joshtyrangiel&utm_medium=website&utm_campaign=book_section"
+      }
+    ],
+    "events": [
+      {
+        "name": "Book Launch",
+        "location": "New York, NY",
+        "date": "TBA"
+      },
+      {
+        "name": "Author Talk & Signing",
+        "location": "Washington, DC",
+        "date": "TBA"
+      },
+      {
+        "name": "Festival Panel",
+        "location": "Los Angeles, CA",
+        "date": "TBA"
+      }
+    ],
+    "mediaAssets": "Media assets: <a href=\"#contact\">press kit</a>, <a href=\"assets/images/book-stand.webp\" download>book cover</a>, <a href=\"#contact\">headshots</a>",
+    "coverImage": "assets/images/book-stand.webp"
+  },
+  "bio": {
+    "heading": "Biography",
+    "paragraphs": [
+      "Josh Tyrangiel is one of the most influential figures in modern American media. As the head of Bloomberg Media, he transformed a financial data company into a global news powerhouse, overseeing Bloomberg Television, Bloomberg Businessweek, Bloomberg.com, and Bloomberg Radio.",
+      "Before Bloomberg, Tyrangiel served as editorial director of The Atlantic, where he helped guide the storied publication through its digital reinvention. His career in journalism began at Time magazine, where he rose to become the youngest deputy managing editor in the magazine's history.",
+      "A regular contributor to The Washington Post and The New York Times, Tyrangiel has spent three decades covering the intersection of technology, culture, and power. His first book, <em>AI for Good</em>, is published by Simon & Schuster.",
+      "He is the founder of Backstory Partners, a strategic advisory and production company. He lives in New York."
+    ],
+    "cv": [
+      {
+        "role": "Deputy Managing Editor",
+        "org": "Time Magazine"
+      },
+      {
+        "role": "Editorial Director",
+        "org": "The Atlantic"
+      },
+      {
+        "role": "Head of Media",
+        "org": "Bloomberg"
+      },
+      {
+        "role": "Author",
+        "org": "AI for Good"
+      },
+      {
+        "role": "Founder",
+        "org": "Backstory Partners"
+      }
+    ]
+  },
+  "journalism": {
+    "heading": "Journalism",
+    "outlets": "Bloomberg, The Atlantic, The Washington Post, The New York Times, Time",
+    "articles": [
+      {
+        "title": "Featured Article Title",
+        "url": "#",
+        "source": "Bloomberg Businessweek",
+        "year": "2023"
+      },
+      {
+        "title": "Featured Article Title",
+        "url": "#",
+        "source": "The Atlantic",
+        "year": "2022"
+      },
+      {
+        "title": "Featured Article Title",
+        "url": "#",
+        "source": "The Washington Post",
+        "year": "2023"
+      },
+      {
+        "title": "Featured Article Title",
+        "url": "#",
+        "source": "The New York Times",
+        "year": "2024"
+      },
+      {
+        "title": "Featured Article Title",
+        "url": "#",
+        "source": "Bloomberg",
+        "year": "2021"
+      },
+      {
+        "title": "Featured Article Title",
+        "url": "#",
+        "source": "Time",
+        "year": "2019"
+      }
+    ]
+  },
+  "speaking": {
+    "heading": "Speaking",
+    "description": "Josh Tyrangiel speaks on the future of media, artificial intelligence, and the evolving relationship between technology and journalism. His talks draw on three decades of experience leading newsrooms and reporting on the forces reshaping how we create, consume, and trust information.",
+    "topics": [
+      "AI & the Future of Information",
+      "The Business of Media",
+      "Leadership in Newsrooms",
+      "Technology, Trust & Society",
+      "Building AI for Good"
+    ],
+    "inquiryCta": "For speaking inquiries, <a href=\"#contact\">get in touch</a>.",
+    "image": "assets/images/josh-speaking.webp"
+  },
+  "media": {
+    "heading": "Media",
+    "appearances": [
+      {
+        "title": "Podcast Appearance Title",
+        "url": "#",
+        "type": "Podcast",
+        "description": "AI for Good discussion"
+      },
+      {
+        "title": "TV Interview Title",
+        "url": "#",
+        "type": "Television",
+        "description": "AI policy & newsrooms"
+      },
+      {
+        "title": "Podcast Appearance Title",
+        "url": "#",
+        "type": "Podcast",
+        "description": "Media business & AI"
+      },
+      {
+        "title": "Conference Talk Title",
+        "url": "#",
+        "type": "Video",
+        "description": "Responsible AI development"
+      },
+      {
+        "title": "Longform Profile Title",
+        "url": "#",
+        "type": "Profile",
+        "description": "Career arc & AI reporting"
+      },
+      {
+        "title": "TV Segment Title",
+        "url": "#",
+        "type": "Television",
+        "description": "AI & democratic institutions"
+      }
+    ]
+  },
+  "backstory": {
+    "heading": "Backstory Partners",
+    "description": "Strategic advisory and production at the intersection of media, technology, and narrative.",
+    "url": "https://backstory-partners.superfun.team/",
+    "logo": "assets/images/backstory-logo-dark.png"
+  },
+  "contact": {
+    "heading": "Contact",
+    "socialLinks": [
+      {
+        "label": "X/Twitter",
+        "url": "https://twitter.com/joshtyrangiel"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/joshtyrangiel"
+      },
+      {
+        "label": "Substack",
+        "url": "https://joshtyrangiel.substack.com"
+      }
+    ]
+  },
+  "footer": {
+    "copy": "© 2026 Josh Tyrangiel. All rights reserved."
+  }
+}

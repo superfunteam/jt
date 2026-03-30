@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Josh Tyrangiel - Admin Portal</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231a1a1a'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='16' font-weight='700' fill='%23f7f7f7' text-anchor='middle'%3EJT%3C/text%3E%3C/svg%3E" type="image/svg+xml">
+  <link href="https://cdn.quilljs.com/1.3.7/quill.bubble.css" rel="stylesheet">
+  <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: #f7f7f7;
+      color: #1a1a1a;
+      min-height: 100vh;
+    }
+
+    /* ---------- Login ---------- */
+    #login-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: #1a1a1a;
+      color: #f7f7f7;
+    }
+    #login-screen h1 { font-size: 2rem; font-weight: 700; margin-bottom: .25rem; letter-spacing: -.02em; }
+    #login-screen p  { opacity: .6; margin-bottom: 2rem; font-size: .875rem; }
+    #login-screen input {
+      width: 280px;
+      padding: .75rem 1rem;
+      border: 1px solid #444;
+      border-radius: 6px;
+      background: #2a2a2a;
+      color: #f7f7f7;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      font-family: inherit;
+    }
+    #login-screen input::placeholder { color: #888; }
+    #login-screen button {
+      width: 280px;
+      padding: .75rem;
+      border: none;
+      border-radius: 6px;
+      background: #fff;
+      color: #1a1a1a;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: opacity .2s;
+    }
+    #login-screen button:hover { opacity: .85; }
+    #login-error { color: #ff6b6b; margin-top: .75rem; font-size: .85rem; display: none; }
+
+    /* ---------- Admin shell ---------- */
+    #admin-shell { display: none; }
+    #admin-shell.active { display: flex; min-height: 100vh; }
+
+    /* Sidebar */
+    .sidebar {
+      width: 240px;
+      background: #1a1a1a;
+      color: #f7f7f7;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      z-index: 100;
+      overflow-y: auto;
+    }
+    .sidebar-logo {
+      padding: 1.5rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      border-bottom: 1px solid #333;
+    }
+    .sidebar nav { flex: 1; padding: .5rem 0; }
+    .sidebar button {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: .75rem 1.5rem;
+      background: none;
+      border: none;
+      color: #ccc;
+      font-size: .9rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background .15s, color .15s;
+    }
+    .sidebar button:hover { background: #2a2a2a; color: #fff; }
+    .sidebar button.active { background: #333; color: #fff; font-weight: 600; }
+    .sidebar-footer {
+      padding: 1rem 1.5rem;
+      border-top: 1px solid #333;
+    }
+    .sidebar-footer button {
+      padding: .5rem 1rem;
+      font-size: .8rem;
+      border-radius: 4px;
+      background: #333;
+      color: #ccc;
+    }
+    .sidebar-footer button:hover { background: #444; color: #fff; }
+
+    /* Main content */
+    .main {
+      margin-left: 240px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: #fff;
+      border-bottom: 1px solid #e0e0e0;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .topbar h2 { font-size: 1.15rem; font-weight: 600; }
+    .topbar-actions { display: flex; gap: .75rem; align-items: center; }
+    #status-msg { font-size: .85rem; color: #888; transition: opacity .3s; }
+    .btn-save {
+      padding: .55rem 1.25rem;
+      border: none;
+      border-radius: 6px;
+      background: #1a1a1a;
+      color: #fff;
+      font-size: .875rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: opacity .2s;
+    }
+    .btn-save:hover { opacity: .8; }
+    .btn-save:disabled { opacity: .4; cursor: not-allowed; }
+
+    .content-area { padding: 2rem; max-width: 860px; }
+
+    /* Sections */
+    .section-panel { display: none; }
+    .section-panel.active { display: block; }
+    .section-desc { color: #888; font-size: .9rem; margin-bottom: 1.75rem; }
+
+    /* Form elements */
+    .field { margin-bottom: 1.5rem; }
+    .field label {
+      display: block;
+      font-weight: 600;
+      font-size: .85rem;
+      margin-bottom: .4rem;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .field input,
+    .field textarea {
+      width: 100%;
+      padding: .65rem .85rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      font-size: .95rem;
+      font-family: inherit;
+      background: #fff;
+      color: #1a1a1a;
+      transition: border-color .2s;
+    }
+    .field input:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: #1a1a1a;
+    }
+    .field textarea { min-height: 100px; resize: vertical; }
+
+    /* Quill wrapper */
+    .quill-wrap {
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      background: #fff;
+      min-height: 120px;
+      overflow: hidden;
+    }
+    .quill-wrap .ql-editor { min-height: 100px; font-size: .95rem; font-family: 'Helvetica Neue', Arial, sans-serif; }
+    .quill-wrap .ql-editor p { margin-bottom: .5em; }
+
+    /* Image upload */
+    .image-upload { margin-bottom: 1.5rem; }
+    .image-upload label {
+      display: block;
+      font-weight: 600;
+      font-size: .85rem;
+      margin-bottom: .4rem;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .image-preview {
+      width: 100%;
+      max-width: 320px;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+      margin-bottom: .5rem;
+      display: block;
+      background: #eee;
+    }
+    .image-upload input[type="file"] { font-size: .85rem; margin-top: .25rem; }
+
+    /* Dynamic cards */
+    h3.dyn-heading {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 1.75rem 0 .75rem;
+      padding-bottom: .4rem;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .dyn-card {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: .75rem;
+      position: relative;
+    }
+    .dyn-card .dyn-row { display: flex; gap: .75rem; margin-bottom: .5rem; flex-wrap: wrap; }
+    .dyn-card .dyn-row:last-child { margin-bottom: 0; }
+    .dyn-card input {
+      flex: 1;
+      min-width: 140px;
+      padding: .5rem .7rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 5px;
+      font-size: .9rem;
+      font-family: inherit;
+    }
+    .dyn-card input:focus { outline: none; border-color: #1a1a1a; }
+    .btn-remove {
+      position: absolute;
+      top: .6rem;
+      right: .6rem;
+      background: none;
+      border: none;
+      color: #ccc;
+      font-size: 1.1rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: color .15s, background .15s;
+    }
+    .btn-remove:hover { color: #ff4444; background: #fff0f0; }
+    .btn-add {
+      display: inline-block;
+      padding: .45rem 1rem;
+      border: 1px dashed #ccc;
+      border-radius: 6px;
+      background: none;
+      color: #888;
+      font-size: .85rem;
+      cursor: pointer;
+      margin-top: .25rem;
+      font-family: inherit;
+      transition: border-color .15s, color .15s;
+    }
+    .btn-add:hover { border-color: #1a1a1a; color: #1a1a1a; }
+
+    /* List row (for topics) */
+    .list-row {
+      display: flex;
+      gap: .5rem;
+      align-items: center;
+      margin-bottom: .5rem;
+    }
+    .list-row input {
+      flex: 1;
+      padding: .5rem .7rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 5px;
+      font-size: .9rem;
+      font-family: inherit;
+    }
+    .list-row input:focus { outline: none; border-color: #1a1a1a; }
+    .list-row .btn-remove {
+      position: static;
+      flex-shrink: 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .sidebar { width: 200px; }
+      .main { margin-left: 200px; }
+      .content-area { padding: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== LOGIN ========== -->
+<div id="login-screen">
+  <h1>Josh Tyrangiel</h1>
+  <p>Admin Portal</p>
+  <input type="password" id="password-input" placeholder="Enter password" autocomplete="current-password">
+  <button onclick="login()">Sign In</button>
+  <div id="login-error">Incorrect password. Please try again.</div>
+</div>
+
+<!-- ========== ADMIN SHELL ========== -->
+<div id="admin-shell">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">JT Admin</div>
+    <nav id="sidebar-nav">
+      <button data-section="hero" class="active">Hero</button>
+      <button data-section="book">Book</button>
+      <button data-section="bio">Bio</button>
+      <button data-section="journalism">Journalism</button>
+      <button data-section="speaking">Speaking</button>
+      <button data-section="media">Media</button>
+      <button data-section="backstory">Backstory</button>
+      <button data-section="contact">Contact</button>
+      <button data-section="footer">Footer</button>
+    </nav>
+    <div class="sidebar-footer">
+      <button onclick="logout()">Sign Out</button>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main">
+    <div class="topbar">
+      <h2 id="topbar-title">Hero</h2>
+      <div class="topbar-actions">
+        <span id="status-msg"></span>
+        <button class="btn-save" onclick="saveChanges()">Save Changes</button>
+      </div>
+    </div>
+
+    <div class="content-area">
+
+      <!-- HERO -->
+      <div class="section-panel active" data-panel="hero">
+        <p class="section-desc">The introduction visitors see first</p>
+        <div class="field">
+          <label>Intro Text</label>
+          <div class="quill-wrap" id="quill-hero-intro"></div>
+        </div>
+        <div class="image-upload" id="hero-image-upload">
+          <label>Hero Image</label>
+          <div id="hero-image-preview-wrap"></div>
+          <input type="file" accept="image/*" onchange="handleImageUpload(this, 'hero.image', 'assets/images/hero-2.webp', 'hero-image-preview-wrap')">
+        </div>
+      </div>
+
+      <!-- BOOK -->
+      <div class="section-panel" data-panel="book">
+        <p class="section-desc">Your book details and purchase links</p>
+        <div class="field">
+          <label>Heading</label>
+          <input type="text" data-field="book.heading">
+        </div>
+        <div class="field">
+          <label>Synopsis Paragraph 1</label>
+          <div class="quill-wrap" id="quill-book-synopsis-0"></div>
+        </div>
+        <div class="field">
+          <label>Synopsis Paragraph 2</label>
+          <div class="quill-wrap" id="quill-book-synopsis-1"></div>
+        </div>
+        <div class="field">
+          <label>Synopsis Paragraph 3</label>
+          <div class="quill-wrap" id="quill-book-synopsis-2"></div>
+        </div>
+        <div class="field">
+          <label>Press Praise</label>
+          <textarea data-field="book.praise"></textarea>
+        </div>
+        <h3 class="dyn-heading">Buy Links</h3>
+        <div id="buyLinks-container"></div>
+        <button class="btn-add" onclick="content.book.buyLinks.push({label:'',url:''});renderBuyLinks();">+ Add Buy Link</button>
+        <h3 class="dyn-heading">Events</h3>
+        <div id="events-container"></div>
+        <button class="btn-add" onclick="content.book.events.push({name:'',location:'',date:''});renderEvents();">+ Add Event</button>
+        <div class="field" style="margin-top:1.5rem;">
+          <label>Media Assets</label>
+          <div class="quill-wrap" id="quill-book-mediaAssets"></div>
+        </div>
+        <div class="image-upload" id="book-cover-upload">
+          <label>Book Cover</label>
+          <div id="book-cover-preview-wrap"></div>
+          <input type="file" accept="image/*" onchange="handleImageUpload(this, 'book.coverImage', 'assets/images/book-stand.webp', 'book-cover-preview-wrap')">
+        </div>
+      </div>
+
+      <!-- BIO -->
+      <div class="section-panel" data-panel="bio">
+        <p class="section-desc">Career biography and CV</p>
+        <div class="field">
+          <label>Heading</label>
+          <input type="text" data-field="bio.heading">
+        </div>
+        <div class="field">
+          <label>Paragraph 1</label>
+          <div class="quill-wrap" id="quill-bio-paragraphs-0"></div>
+        </div>
+        <div class="field">
+          <label>Paragraph 2</label>
+          <div class="quill-wrap" id="quill-bio-paragraphs-1"></div>
+        </div>
+        <div class="field">
+          <label>Paragraph 3</label>
+          <div class="quill-wrap" id="quill-bio-paragraphs-2"></div>
+        </div>
+        <div class="field">
+          <label>Paragraph 4</label>
+          <div class="quill-wrap" id="quill-bio-paragraphs-3"></div>
+        </div>
+        <h3 class="dyn-heading">CV</h3>
+        <div id="cv-container"></div>
+        <button class="btn-add" onclick="content.bio.cv.push({role:'',org:''});renderCV();">+ Add CV Entry</button>
+      </div>
+
+      <!-- JOURNALISM -->
+      <div class="section-panel" data-panel="journalism">
+        <p class="section-desc">Article links and publications</p>
+        <div class="field">
+          <label>Heading</label>
+          <input type="text" data-field="journalism.heading">
+        </div>
+        <div class="field">
+          <label>Outlets</label>
+          <input type="text" data-field="journalism.outlets">
+        </div>
+        <h3 class="dyn-heading">Articles</h3>
+        <div id="articles-container"></div>
+        <button class="btn-add" onclick="content.journalism.articles.push({title:'',url:'',source:'',year:''});renderArticles();">+ Add Article</button>
+      </div>
+
+      <!-- SPEAKING -->
+      <div class="section-panel" data-panel="speaking">
+        <p class="section-desc">Speaking topics and inquiries</p>
+        <div class="field">
+          <label>Heading</label>
+          <input type="text" data-field="speaking.heading">
+        </div>
+        <div class="field">
+          <label>Description</label>
+          <textarea data-field="speaking.description"></textarea>
+        </div>
+        <h3 class="dyn-heading">Topics</h3>
+        <div id="topics-container"></div>
+        <button class="btn-add" onclick="content.speaking.topics.push('');renderTopics();">+ Add Topic</button>
+        <div class="field" style="margin-top:1.5rem;">
+          <label>Inquiry CTA</label>
+          <div class="quill-wrap" id="quill-speaking-inquiryCta"></div>
+        </div>
+        <div class="image-upload" id="speaking-image-upload">
+          <label>Speaker Photo</label>
+          <div id="speaking-image-preview-wrap"></div>
+          <input type="file" accept="image/*" onchange="handleImageUpload(this, 'speaking.image', 'assets/images/josh-speaking.webp', 'speaking-image-preview-wrap')">
+        </div>
+      </div>
+
+      <!-- MEDIA -->
+      <div class="section-panel" data-panel="media">
+        <p class="section-desc">Podcast, TV, and press appearances</p>
+        <div class="field">
+          <label>Heading</label>
+          <input type="text" data-field="media.heading">
+        </div>
+        <h3 class="dyn-heading">Appearances</h3>
+        <div id="appearances-container"></div>
+        <button class="btn-add" onclick="content.media.appearances.push({title:'',url:'',type:'',description:''});renderAppearances();">+ Add Appearance</button>
+      </div>
+
+      <!-- BACKSTORY -->
+      <div class="section-panel" data-panel="backstory">
+        <p class="section-desc">Backstory Partners section</p>
+        <div class="field">
+          <label>Heading</label>
+          <input type="text" data-field="backstory.heading">
+        </div>
+        <div class="field">
+          <label>Description</label>
+          <textarea data-field="backstory.description"></textarea>
+        </div>
+        <div class="field">
+          <label>Link URL</label>
+          <input type="text" data-field="backstory.url">
+        </div>
+        <div class="image-upload" id="backstory-logo-upload">
+          <label>Logo</label>
+          <div id="backstory-logo-preview-wrap"></div>
+          <input type="file" accept="image/*" onchange="handleImageUpload(this, 'backstory.logo', 'assets/images/backstory-logo-dark.png', 'backstory-logo-preview-wrap')">
+        </div>
+      </div>
+
+      <!-- CONTACT -->
+      <div class="section-panel" data-panel="contact">
+        <p class="section-desc">Social links</p>
+        <div class="field">
+          <label>Heading</label>
+          <input type="text" data-field="contact.heading">
+        </div>
+        <h3 class="dyn-heading">Social Links</h3>
+        <div id="socialLinks-container"></div>
+        <button class="btn-add" onclick="content.contact.socialLinks.push({label:'',url:''});renderSocialLinks();">+ Add Social Link</button>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="section-panel" data-panel="footer">
+        <p class="section-desc">Footer text</p>
+        <div class="field">
+          <label>Copyright Text</label>
+          <input type="text" data-field="footer.copy">
+        </div>
+      </div>
+
+    </div><!-- .content-area -->
+  </div><!-- .main -->
+</div><!-- #admin-shell -->
+
+<script>
+/* ============================================================
+   STATE
+   ============================================================ */
+let content = null;
+let quillInstances = {};
+let pendingImages = [];   // { path, file }
+let currentSection = 'hero';
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+function escAttr(s) {
+  if (typeof s !== 'string') return '';
+  return s.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function getPath(obj, path) {
+  return path.split('.').reduce((o, k) => {
+    if (o == null) return undefined;
+    if (/^\d+$/.test(k)) return o[parseInt(k, 10)];
+    return o[k];
+  }, obj);
+}
+
+function setPath(obj, path, value) {
+  const keys = path.split('.');
+  let cur = obj;
+  for (let i = 0; i < keys.length - 1; i++) {
+    const k = /^\d+$/.test(keys[i]) ? parseInt(keys[i], 10) : keys[i];
+    if (cur[k] == null) cur[k] = /^\d+$/.test(keys[i + 1]) ? [] : {};
+    cur = cur[k];
+  }
+  const last = /^\d+$/.test(keys[keys.length - 1]) ? parseInt(keys[keys.length - 1], 10) : keys[keys.length - 1];
+  cur[last] = value;
+}
+
+/* ============================================================
+   QUILL
+   ============================================================ */
+function initQuill(id) {
+  if (quillInstances[id]) return quillInstances[id];
+  const q = new Quill('#' + id, {
+    theme: 'bubble',
+    modules: {
+      toolbar: [['bold', 'italic', 'link']]
+    },
+    placeholder: 'Enter text...'
+  });
+  quillInstances[id] = q;
+  return q;
+}
+
+function loadIntoQuill(id, html) {
+  const q = initQuill(id);
+  q.root.innerHTML = html || '';
+}
+
+function cleanQuillHTML(id) {
+  const q = quillInstances[id];
+  if (!q) return '';
+  let html = q.root.innerHTML;
+  if (html === '<p><br></p>' || html === '<p></p>') return '';
+  // Unwrap single paragraph
+  const m = html.match(/^<p>(.*)<\/p>$/s);
+  if (m && !m[1].includes('<p>')) html = m[1];
+  return html;
+}
+
+/* ============================================================
+   STATUS
+   ============================================================ */
+function showStatus(msg, duration) {
+  const el = document.getElementById('status-msg');
+  el.textContent = msg;
+  el.style.opacity = '1';
+  if (duration) {
+    setTimeout(() => { el.style.opacity = '0'; }, duration);
+  }
+}
+
+/* ============================================================
+   AUTH
+   ============================================================ */
+function login() {
+  const pw = document.getElementById('password-input').value.trim();
+  if (!pw) return;
+  devLogin(pw);
+}
+
+function devLogin(pw) {
+  // Validate password by making a test call
+  sessionStorage.setItem('admin_pw', pw);
+  showStatus('Signing in...');
+  loadContent().then(() => {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-shell').classList.add('active');
+    showStatus('');
+  }).catch(() => {
+    sessionStorage.removeItem('admin_pw');
+    document.getElementById('login-error').style.display = 'block';
+    showStatus('');
+  });
+}
+
+function logout() {
+  sessionStorage.removeItem('admin_pw');
+  content = null;
+  quillInstances = {};
+  pendingImages = [];
+  document.getElementById('admin-shell').classList.remove('active');
+  document.getElementById('login-screen').style.display = '';
+  document.getElementById('password-input').value = '';
+  document.getElementById('login-error').style.display = 'none';
+}
+
+/* ============================================================
+   LOAD CONTENT
+   ============================================================ */
+async function loadContent() {
+  const res = await fetch('/content.json?_=' + Date.now());
+  if (!res.ok) throw new Error('Failed to load content');
+  content = await res.json();
+  populateForms();
+}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+function showSection(name) {
+  currentSection = name;
+  // sidebar buttons
+  document.querySelectorAll('#sidebar-nav button').forEach(b => {
+    b.classList.toggle('active', b.dataset.section === name);
+  });
+  // panels
+  document.querySelectorAll('.section-panel').forEach(p => {
+    p.classList.toggle('active', p.dataset.panel === name);
+  });
+  // topbar title
+  const titles = {
+    hero:'Hero', book:'Book', bio:'Bio', journalism:'Journalism',
+    speaking:'Speaking', media:'Media', backstory:'Backstory',
+    contact:'Contact', footer:'Footer'
+  };
+  document.getElementById('topbar-title').textContent = titles[name] || name;
+}
+
+document.querySelectorAll('#sidebar-nav button').forEach(btn => {
+  btn.addEventListener('click', () => showSection(btn.dataset.section));
+});
+
+/* ============================================================
+   POPULATE FORMS
+   ============================================================ */
+function populateForms() {
+  if (!content) return;
+
+  // Plain inputs and textareas
+  document.querySelectorAll('[data-field]').forEach(el => {
+    const val = getPath(content, el.dataset.field);
+    el.value = val != null ? val : '';
+  });
+
+  // Quill editors
+  loadIntoQuill('quill-hero-intro', content.hero.intro);
+  loadIntoQuill('quill-book-synopsis-0', content.book.synopsis[0]);
+  loadIntoQuill('quill-book-synopsis-1', content.book.synopsis[1]);
+  loadIntoQuill('quill-book-synopsis-2', content.book.synopsis[2]);
+  loadIntoQuill('quill-book-mediaAssets', content.book.mediaAssets);
+  loadIntoQuill('quill-bio-paragraphs-0', content.bio.paragraphs[0]);
+  loadIntoQuill('quill-bio-paragraphs-1', content.bio.paragraphs[1]);
+  loadIntoQuill('quill-bio-paragraphs-2', content.bio.paragraphs[2]);
+  loadIntoQuill('quill-bio-paragraphs-3', content.bio.paragraphs[3]);
+  loadIntoQuill('quill-speaking-inquiryCta', content.speaking.inquiryCta);
+
+  // Dynamic sections
+  renderBuyLinks();
+  renderEvents();
+  renderCV();
+  renderArticles();
+  renderTopics();
+  renderAppearances();
+  renderSocialLinks();
+
+  // Image previews
+  renderHeroImage();
+  renderBookCover();
+  renderSpeakingImage();
+  renderBackstoryLogo();
+}
+
+/* ============================================================
+   DYNAMIC RENDERERS
+   ============================================================ */
+function renderBuyLinks() {
+  const c = document.getElementById('buyLinks-container');
+  c.innerHTML = content.book.buyLinks.map((item, i) => `
+    <div class="dyn-card">
+      <button class="btn-remove" onclick="content.book.buyLinks.splice(${i},1);renderBuyLinks();">&times;</button>
+      <div class="dyn-row">
+        <input placeholder="Label" value="${escAttr(item.label)}" oninput="content.book.buyLinks[${i}].label=this.value">
+        <input placeholder="URL" value="${escAttr(item.url)}" oninput="content.book.buyLinks[${i}].url=this.value">
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderEvents() {
+  const c = document.getElementById('events-container');
+  c.innerHTML = content.book.events.map((item, i) => `
+    <div class="dyn-card">
+      <button class="btn-remove" onclick="content.book.events.splice(${i},1);renderEvents();">&times;</button>
+      <div class="dyn-row">
+        <input placeholder="Name" value="${escAttr(item.name)}" oninput="content.book.events[${i}].name=this.value">
+        <input placeholder="Location" value="${escAttr(item.location)}" oninput="content.book.events[${i}].location=this.value">
+        <input placeholder="Date" value="${escAttr(item.date)}" oninput="content.book.events[${i}].date=this.value">
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderCV() {
+  const c = document.getElementById('cv-container');
+  c.innerHTML = content.bio.cv.map((item, i) => `
+    <div class="dyn-card">
+      <button class="btn-remove" onclick="content.bio.cv.splice(${i},1);renderCV();">&times;</button>
+      <div class="dyn-row">
+        <input placeholder="Role" value="${escAttr(item.role)}" oninput="content.bio.cv[${i}].role=this.value">
+        <input placeholder="Organization" value="${escAttr(item.org)}" oninput="content.bio.cv[${i}].org=this.value">
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderArticles() {
+  const c = document.getElementById('articles-container');
+  c.innerHTML = content.journalism.articles.map((item, i) => `
+    <div class="dyn-card">
+      <button class="btn-remove" onclick="content.journalism.articles.splice(${i},1);renderArticles();">&times;</button>
+      <div class="dyn-row">
+        <input placeholder="Title" value="${escAttr(item.title)}" oninput="content.journalism.articles[${i}].title=this.value">
+        <input placeholder="URL" value="${escAttr(item.url)}" oninput="content.journalism.articles[${i}].url=this.value">
+      </div>
+      <div class="dyn-row">
+        <input placeholder="Source" value="${escAttr(item.source)}" oninput="content.journalism.articles[${i}].source=this.value">
+        <input placeholder="Year" value="${escAttr(item.year)}" oninput="content.journalism.articles[${i}].year=this.value" style="max-width:100px;">
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderTopics() {
+  const c = document.getElementById('topics-container');
+  c.innerHTML = content.speaking.topics.map((topic, i) => `
+    <div class="list-row">
+      <input value="${escAttr(topic)}" oninput="content.speaking.topics[${i}]=this.value">
+      <button class="btn-remove" onclick="content.speaking.topics.splice(${i},1);renderTopics();">&times;</button>
+    </div>
+  `).join('');
+}
+
+function renderAppearances() {
+  const c = document.getElementById('appearances-container');
+  c.innerHTML = content.media.appearances.map((item, i) => `
+    <div class="dyn-card">
+      <button class="btn-remove" onclick="content.media.appearances.splice(${i},1);renderAppearances();">&times;</button>
+      <div class="dyn-row">
+        <input placeholder="Title" value="${escAttr(item.title)}" oninput="content.media.appearances[${i}].title=this.value">
+        <input placeholder="URL" value="${escAttr(item.url)}" oninput="content.media.appearances[${i}].url=this.value">
+      </div>
+      <div class="dyn-row">
+        <input placeholder="Type (Podcast, Television, etc.)" value="${escAttr(item.type)}" oninput="content.media.appearances[${i}].type=this.value">
+        <input placeholder="Description" value="${escAttr(item.description)}" oninput="content.media.appearances[${i}].description=this.value">
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderSocialLinks() {
+  const c = document.getElementById('socialLinks-container');
+  c.innerHTML = content.contact.socialLinks.map((item, i) => `
+    <div class="dyn-card">
+      <button class="btn-remove" onclick="content.contact.socialLinks.splice(${i},1);renderSocialLinks();">&times;</button>
+      <div class="dyn-row">
+        <input placeholder="Label" value="${escAttr(item.label)}" oninput="content.contact.socialLinks[${i}].label=this.value">
+        <input placeholder="URL" value="${escAttr(item.url)}" oninput="content.contact.socialLinks[${i}].url=this.value">
+      </div>
+    </div>
+  `).join('');
+}
+
+/* ============================================================
+   IMAGE PREVIEW RENDERERS
+   ============================================================ */
+function renderHeroImage() {
+  const wrap = document.getElementById('hero-image-preview-wrap');
+  const src = content.hero.image;
+  wrap.innerHTML = src ? `<img class="image-preview" src="/${escAttr(src)}?_=${Date.now()}" alt="Hero image">` : '';
+}
+
+function renderBookCover() {
+  const wrap = document.getElementById('book-cover-preview-wrap');
+  const src = content.book.coverImage;
+  wrap.innerHTML = src ? `<img class="image-preview" src="/${escAttr(src)}?_=${Date.now()}" alt="Book cover">` : '';
+}
+
+function renderSpeakingImage() {
+  const wrap = document.getElementById('speaking-image-preview-wrap');
+  const src = content.speaking.image;
+  wrap.innerHTML = src ? `<img class="image-preview" src="/${escAttr(src)}?_=${Date.now()}" alt="Speaker photo">` : '';
+}
+
+function renderBackstoryLogo() {
+  const wrap = document.getElementById('backstory-logo-preview-wrap');
+  const src = content.backstory.logo;
+  wrap.innerHTML = src ? `<img class="image-preview" src="/${escAttr(src)}?_=${Date.now()}" alt="Backstory logo">` : '';
+}
+
+/* ============================================================
+   IMAGE UPLOAD HANDLER
+   ============================================================ */
+function handleImageUpload(input, fieldPath, uploadPath, previewWrapId) {
+  const file = input.files[0];
+  if (!file) return;
+
+  // Preview immediately
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const wrap = document.getElementById(previewWrapId);
+    wrap.innerHTML = `<img class="image-preview" src="${e.target.result}" alt="Preview">`;
+  };
+  reader.readAsDataURL(file);
+
+  // Queue for upload on save
+  // Remove any existing pending upload for the same path
+  pendingImages = pendingImages.filter(p => p.path !== uploadPath);
+  pendingImages.push({ path: uploadPath, file: file, fieldPath: fieldPath });
+}
+
+/* ============================================================
+   GATHER CONTENT
+   ============================================================ */
+function gatherContent() {
+  if (!content) return;
+
+  // Plain inputs and textareas
+  document.querySelectorAll('[data-field]').forEach(el => {
+    setPath(content, el.dataset.field, el.value);
+  });
+
+  // Quill editors
+  content.hero.intro = cleanQuillHTML('quill-hero-intro');
+  content.book.synopsis[0] = cleanQuillHTML('quill-book-synopsis-0');
+  content.book.synopsis[1] = cleanQuillHTML('quill-book-synopsis-1');
+  content.book.synopsis[2] = cleanQuillHTML('quill-book-synopsis-2');
+  content.book.mediaAssets = cleanQuillHTML('quill-book-mediaAssets');
+  content.bio.paragraphs[0] = cleanQuillHTML('quill-bio-paragraphs-0');
+  content.bio.paragraphs[1] = cleanQuillHTML('quill-bio-paragraphs-1');
+  content.bio.paragraphs[2] = cleanQuillHTML('quill-bio-paragraphs-2');
+  content.bio.paragraphs[3] = cleanQuillHTML('quill-bio-paragraphs-3');
+  content.speaking.inquiryCta = cleanQuillHTML('quill-speaking-inquiryCta');
+
+  // Dynamic arrays are already mutated in-place via oninput handlers
+}
+
+/* ============================================================
+   SAVE
+   ============================================================ */
+async function saveChanges() {
+  const pw = sessionStorage.getItem('admin_pw');
+  if (!pw) { showStatus('Not signed in', 3000); return; }
+
+  const btn = document.querySelector('.btn-save');
+  btn.disabled = true;
+  showStatus('Saving...');
+
+  try {
+    gatherContent();
+
+    // Upload pending images first
+    for (const img of pendingImages) {
+      showStatus(`Uploading ${img.path}...`);
+      const base64 = await fileToBase64(img.file);
+      const res = await fetch('/.netlify/functions/upload-image', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: pw, path: img.path, data: base64 })
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error || `Image upload failed for ${img.path}`);
+      }
+    }
+    pendingImages = [];
+
+    // Save content.json
+    showStatus('Saving content...');
+    const res = await fetch('/.netlify/functions/save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: pw, content: content })
+    });
+
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      if (res.status === 401) {
+        showStatus('Unauthorized. Please sign in again.', 4000);
+        logout();
+        return;
+      }
+      throw new Error(err.error || 'Save failed');
+    }
+
+    showStatus('Saved successfully!', 3000);
+  } catch (err) {
+    showStatus('Error: ' + err.message, 5000);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      // Strip the data:... prefix to get raw base64
+      const b64 = reader.result.split(',')[1];
+      resolve(b64);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+function init() {
+  // Auto-login from session
+  const pw = sessionStorage.getItem('admin_pw');
+  if (pw) {
+    devLogin(pw);
+  }
+
+  // Enter key on password input
+  document.getElementById('password-input').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') login();
+  });
+}
+
+init();
+</script>
+</body>
+</html>
