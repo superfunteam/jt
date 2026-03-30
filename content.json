@@ -1,6 +1,6 @@
 {
   "hero": {
-    "intro": "<strong>Josh Tyrangiel</strong> is a journalist, producer, and author. He has led newsrooms at <a href=\"https://www.bloomberg.com\" target=\"_blank\">Bloomberg</a>, <a href=\"https://www.theatlantic.com\" target=\"_blank\">The Atlantic</a>, and <a href=\"https://time.com\" target=\"_blank\">Time</a>, and spent three decades covering the intersection of technology, culture, and power. His book <strong><em>AI for Good</em></strong> is published by <a href=\"https://www.simonandschuster.com/?utm_source=joshtyrangiel&amp;utm_medium=website&amp;utm_campaign=book_launch\" target=\"_blank\">Simon & Schuster</a> in 2026. Available at <a href=\"https://www.amazon.com/?utm_source=joshtyrangiel&amp;utm_medium=website&amp;utm_campaign=book_launch\" target=\"_blank\">Amazon</a>, <a href=\"https://bookshop.org/?utm_source=joshtyrangiel&amp;utm_medium=website&amp;utm_campaign=book_launch\" target=\"_blank\">Bookshop</a>, <a href=\"https://www.indiebound.org/?utm_source=joshtyrangiel&amp;utm_medium=website&amp;utm_campaign=book_launch\" target=\"_blank\">IndieBound</a>.",
+    "intro": "<strong>Josh Tyrangiel</strong> is a journalist, producer, and author. He has led newsrooms at <a href=\"https://www.bloomberg.com\" target=\"_blank\">Bloomberg</a>, <a href=\"https://www.theatlantic.com\" target=\"_blank\">The Atlantic</a>, and <a href=\"https://time.com\" target=\"_blank\">Time</a>, and spent three decades covering the intersection of technology, culture, and power. His book <strong><em>AI for Good</em></strong> is published by <a href=\"https://www.simonandschuster.com/?utm_source=joshtyrangiel&amp;utm_medium=website&amp;utm_campaign=book_launch\" target=\"_blank\">Simon &amp; Schuster</a> in 2026. Available at <a href=\"https://www.amazon.com/?utm_source=joshtyrangiel&amp;utm_medium=website&amp;utm_campaign=book_launch\" target=\"_blank\">Amazon</a>, <a href=\"https://bookshop.org/?utm_source=joshtyrangiel&amp;utm_medium=website&amp;utm_campaign=book_launch\" target=\"_blank\">Bookshop</a>, <a href=\"https://www.indiebound.org/?utm_source=joshtyrangiel&amp;utm_medium=website&amp;utm_campaign=book_launch\" target=\"_blank\">IndieBound</a>!",
     "image": "assets/images/hero-2.webp"
   },
   "book": {
@@ -46,7 +46,7 @@
         "date": "TBA"
       }
     ],
-    "mediaAssets": "Media assets: <a href=\"#contact\">press kit</a>, <a href=\"assets/images/book-stand.webp\" download>book cover</a>, <a href=\"#contact\">headshots</a>",
+    "mediaAssets": "Media assets: <a href=\"#contact\" target=\"_blank\">press kit</a>, <a href=\"assets/images/book-stand.webp\" target=\"_blank\">book cover</a>, <a href=\"#contact\" target=\"_blank\">headshots</a>",
     "coverImage": "assets/images/book-stand.webp"
   },
   "bio": {
@@ -54,7 +54,7 @@
     "paragraphs": [
       "Josh Tyrangiel is one of the most influential figures in modern American media. As the head of Bloomberg Media, he transformed a financial data company into a global news powerhouse, overseeing Bloomberg Television, Bloomberg Businessweek, Bloomberg.com, and Bloomberg Radio.",
       "Before Bloomberg, Tyrangiel served as editorial director of The Atlantic, where he helped guide the storied publication through its digital reinvention. His career in journalism began at Time magazine, where he rose to become the youngest deputy managing editor in the magazine's history.",
-      "A regular contributor to The Washington Post and The New York Times, Tyrangiel has spent three decades covering the intersection of technology, culture, and power. His first book, <em>AI for Good</em>, is published by Simon & Schuster.",
+      "A regular contributor to The Washington Post and The New York Times, Tyrangiel has spent three decades covering the intersection of technology, culture, and power. His first book, <em>AI for Good</em>, is published by Simon &amp; Schuster.",
       "He is the founder of Backstory Partners, a strategic advisory and production company. He lives in New York."
     ],
     "cv": [
@@ -132,7 +132,7 @@
       "Technology, Trust & Society",
       "Building AI for Good"
     ],
-    "inquiryCta": "For speaking inquiries, <a href=\"#contact\">get in touch</a>.",
+    "inquiryCta": "For speaking inquiries, <a href=\"#contact\" target=\"_blank\">get in touch</a>.",
     "image": "assets/images/josh-speaking.webp"
   },
   "media": {
