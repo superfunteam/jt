@@ -14,19 +14,23 @@
     "buyLinks": [
       {
         "label": "Amazon",
-        "url": "https://www.amazon.com/?utm_source=joshtyrangiel&utm_medium=website&utm_campaign=book_section"
+        "url": "https://www.amazon.com/AI-Good-People-Artificial-Intelligence/dp/1668082500/ref=sr_1_1?crid=J3DKGVZQOMDB&dib=eyJ2IjoiMSJ9.PTwJ4yqxgxUvzqMZkb5_xxrDpxP6BysrooMSJlFPd9RZnNuzSeY2_JPQ6DQkUPTj4t-Enm7wPYsQHuOciwoCON94ilyKbOCaMqbmjLLpo0Qsds0NHruerp96vHy9PUws0zqvnZ44KUiNiWRW5RtkmEGs2OmXfJ-mCzywlBYAYQO4EkaVf7ooSVktU6qpq8abUDoJAr4bZfZBlZhBNGnOOCQnsy42MGAjtRfVXrqVgQk.q1VWtYFkHOArjqjkMeUufcUd5gyH7mpLYW0AbNVA-Co&dib_tag=se&keywords=ai+for+good+josh+tyrangiel&qid=1775180679&sprefix=ai+for+good+tyr%2Caps%2C129&sr=8-1"
       },
       {
         "label": "Bookshop",
-        "url": "https://bookshop.org/?utm_source=joshtyrangiel&utm_medium=website&utm_campaign=book_section"
+        "url": "https://bookshop.org/p/books/ai-for-good-how-real-people-are-using-artificial-intelligence-to-fix-things-that-matter-josh-tyrangiel/162565d3abfb9b08?ean=9781668082508&next=t"
       },
       {
         "label": "IndieBound",
-        "url": "https://www.indiebound.org/?utm_source=joshtyrangiel&utm_medium=website&utm_campaign=book_section"
+        "url": "https://bookshop.org/p/books/ai-for-good-how-real-people-are-using-artificial-intelligence-to-fix-things-that-matter-josh-tyrangiel/162565d3abfb9b08?ean=9781668082508&next=t"
       },
       {
         "label": "Simon & Schuster",
-        "url": "https://www.simonandschuster.com/?utm_source=joshtyrangiel&utm_medium=website&utm_campaign=book_section"
+        "url": "https://www.simonandschuster.com/books/AI-for-Good/Josh-Tyrangiel/9781668082508"
+      },
+      {
+        "label": "The Strand",
+        "url": ""
       }
     ],
     "events": [
@@ -39,11 +43,6 @@
         "name": "Book signing and Q&A with Jeffrey Goldberg",
         "location": "Politics and Prose at The Wharf, Washington, DC",
         "date": "May 20th, 2026"
-      },
-      {
-        "name": "Festival Panel",
-        "location": "Los Angeles, CA",
-        "date": "TBA"
       }
     ],
     "mediaAssets": "Media assets: <a href=\"#contact\" target=\"_blank\">press kit</a>, <a href=\"assets/images/book-stand.webp\" target=\"_blank\">book cover</a>, <a href=\"#contact\" target=\"_blank\">headshots</a>",
