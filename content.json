@@ -1,16 +1,16 @@
 {
   "hero": {
-    "intro": "<strong>Josh Tyrangiel</strong> is a journalist, producer, and author. He has led newsrooms at <a href=\"https://www.bloomberg.com\" target=\"_blank\">Bloomberg</a>, <a href=\"https://www.theatlantic.com\" target=\"_blank\">The Atlantic</a>, and <a href=\"https://time.com\" target=\"_blank\">Time</a>, and spent three decades covering the intersection of technology, culture, and power. His book <strong><em>AI for Good</em></strong> is published by <a href=\"https://www.simonandschuster.com/?utm_source=joshtyrangiel&amp;utm_medium=website&amp;utm_campaign=book_launch\" target=\"_blank\">Simon & Schuster</a> in 2026. Available at <a href=\"https://www.amazon.com/?utm_source=joshtyrangiel&amp;utm_medium=website&amp;utm_campaign=book_launch\" target=\"_blank\">Amazon</a>, <a href=\"https://bookshop.org/?utm_source=joshtyrangiel&amp;utm_medium=website&amp;utm_campaign=book_launch\" target=\"_blank\">Bookshop</a>, <a href=\"https://www.indiebound.org/?utm_source=joshtyrangiel&amp;utm_medium=website&amp;utm_campaign=book_launch\" target=\"_blank\">IndieBound</a>.",
+    "intro": "<strong>Josh Tyrangiel</strong> is a journalist, producer, and author. He has led newsrooms at <a href=\"https://www.bloomberg.com\" target=\"_blank\">Bloomberg</a>, <a href=\"https://www.theatlantic.com\" target=\"_blank\">The Atlantic</a>, and <a href=\"https://time.com\" target=\"_blank\">Time</a>, and spent three decades covering the intersection of technology, culture, and power. His book <strong><em>AI for Good</em></strong> is published by <a href=\"https://www.simonandschuster.com/?utm_source=joshtyrangiel&amp;utm_medium=website&amp;utm_campaign=book_launch\" target=\"_blank\">Simon &amp; Schuster</a> in 2026. Available at <a href=\"https://www.amazon.com/?utm_source=joshtyrangiel&amp;utm_medium=website&amp;utm_campaign=book_launch\" target=\"_blank\">Amazon</a>, <a href=\"https://bookshop.org/?utm_source=joshtyrangiel&amp;utm_medium=website&amp;utm_campaign=book_launch\" target=\"_blank\">Bookshop</a>, <a href=\"https://www.indiebound.org/?utm_source=joshtyrangiel&amp;utm_medium=website&amp;utm_campaign=book_launch\" target=\"_blank\">IndieBound</a>.",
     "image": "assets/images/hero-2.webp"
   },
   "book": {
     "heading": "AI for Good",
     "synopsis": [
-      "This isn't a book about high-profile tech CEOs who want to use AI to \"break shit.\" It's about smart pragmatists using AI to make the world better — teachers, doctors, bureaucrats who stumbled into it as a way to solve specific, tangible problems.",
-      "Josh Tyrangiel's journey into AI began with a late-night YouTube video featuring the retired four-star general who ran Covid vaccine distribution during Operation Warp Speed. The success of that effort depended on AI's ability to synthesize vast amounts of logistical data. AI wasn't the hero — it was the tool that helped real people get things done.",
-      "<em>AI for Good</em> follows those people. It explores AI's quiet revolution in government, medicine, education, and human connection — places where it amplifies human judgment rather than replaces it. Success isn't guaranteed. Change is hard. Institutions move slowly. But even in failure there are lessons for anyone interested in using AI carefully to build a better world today."
+      "<span style=\"background-color: transparent; color: rgb(0, 0, 0);\">AI is usually framed as a radical force of transformation—speeding us into a utopian future or a total hellscape. This book tells a different story. It’s not about high-profile tech CEOs trying to create an AI superintelligence. It’s about smart pragmatists using AI to make things that matter in the world a little bit better.</span>",
+      "<span style=\"background-color: transparent; color: rgb(0, 0, 0);\">My own journey into AI began with a late-night YouTube video featuring the retired four-star general who ran Covid vaccine distribution during Operation Warp Speed. The success of that effort depended on AI's ability to synthesize vast amounts of logistical data. AI wasn't the hero—it was the tool that helped real people accomplish a seemingly impossible task.</span>",
+      "<span style=\"background-color: transparent; color: rgb(0, 0, 0);\">This book follows those kinds people—wise, skilled, stubborn people who are contributors to a thriving AI counterculture. It explores AI's quiet revolution in government, medicine, education, and human connection—places where it amplifies human judgment rather than replaces it. Success isn't guaranteed. Change is hard. Institutions move slowly. But even in failure there are lessons for anyone interested in using AI carefully to build a better world today.</span>"
     ],
-    "praise": "Press quotes TK",
+    "praise": "\"A lively, irreverent, and sharply observed critique of AI hype.\" —Kirkus Reviews",
     "buyLinks": [
       {
         "label": "Amazon",
@@ -31,14 +31,14 @@
     ],
     "events": [
       {
-        "name": "Book Launch",
-        "location": "New York, NY",
-        "date": "TBA"
+        "name": "Book signing and Q&A with Ashlee Vance",
+        "location": "Kepler's Books, Menlo Park",
+        "date": "May 18th, 2026"
       },
       {
-        "name": "Author Talk & Signing",
-        "location": "Washington, DC",
-        "date": "TBA"
+        "name": "Book signing and Q&A with Jeffrey Goldberg",
+        "location": "Politics and Prose at The Wharf, Washington, DC",
+        "date": "May 20th, 2026"
       },
       {
         "name": "Festival Panel",
@@ -54,7 +54,7 @@
     "paragraphs": [
       "Josh Tyrangiel is one of the most influential figures in modern American media. As the head of Bloomberg Media, he transformed a financial data company into a global news powerhouse, overseeing Bloomberg Television, Bloomberg Businessweek, Bloomberg.com, and Bloomberg Radio.",
       "Before Bloomberg, Tyrangiel served as editorial director of The Atlantic, where he helped guide the storied publication through its digital reinvention. His career in journalism began at Time magazine, where he rose to become the youngest deputy managing editor in the magazine's history.",
-      "A regular contributor to The Washington Post and The New York Times, Tyrangiel has spent three decades covering the intersection of technology, culture, and power. His first book, <em>AI for Good</em>, is published by Simon & Schuster.",
+      "A regular contributor to The Washington Post and The New York Times, Tyrangiel has spent three decades covering the intersection of technology, culture, and power. His first book, <em>AI for Good</em>, is published by Simon &amp; Schuster.",
       "He is the founder of Backstory Partners, a strategic advisory and production company. He lives in New York."
     ],
     "cv": [
