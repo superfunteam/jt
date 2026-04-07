@@ -592,32 +592,6 @@ function setPath(obj, path, value) {
 /* ============================================================
    QUILL
    ============================================================ */
-function sanitizePasteHTML(html) {
-  const doc = new DOMParser().parseFromString(html, 'text/html');
-  const drop = new Set(['IMG','VIDEO','SVG','PICTURE','CANVAS','IFRAME','OBJECT','EMBED']);
-  const block = new Set(['P','DIV','H1','H2','H3','H4','H5','H6','LI','BLOCKQUOTE','SECTION','ARTICLE']);
-  function walk(node) {
-    let out = '';
-    for (const c of node.childNodes) {
-      if (c.nodeType === 3) {
-        out += c.textContent.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-      } else if (c.nodeType === 1) {
-        const tag = c.tagName;
-        if (drop.has(tag)) continue;
-        const inner = walk(c);
-        if (tag === 'STRONG' || tag === 'B') out += '<strong>' + inner + '</strong>';
-        else if (tag === 'EM' || tag === 'I') out += '<em>' + inner + '</em>';
-        else if (tag === 'A' && c.getAttribute('href')) out += '<a href="' + c.getAttribute('href').replace(/"/g,'&quot;') + '">' + inner + '</a>';
-        else if (tag === 'BR') out += '<br>';
-        else if (block.has(tag)) out += '<p>' + inner + '</p>';
-        else out += inner;
-      }
-    }
-    return out;
-  }
-  return walk(doc.body);
-}
-
 function initQuill(id) {
   if (quillInstances[id]) return quillInstances[id];
   const q = new Quill('#' + id, {
@@ -627,22 +601,18 @@ function initQuill(id) {
     },
     placeholder: 'Enter text...'
   });
-  // Intercept all pastes before Quill — only allow text, bold, italic, links
+  // Paste as plain text only — blocks images, styles, and all markup.
+  // Bold/italic/links can be applied via the toolbar after pasting.
   q.root.addEventListener('paste', (e) => {
     e.preventDefault();
     e.stopImmediatePropagation();
-    const html = e.clipboardData.getData('text/html');
     const text = e.clipboardData.getData('text/plain');
-    if (!html && !text) return; // file-only paste (screenshot) — blocked
+    if (!text) return;
     const range = q.getSelection(true);
     if (!range) return;
     if (range.length) q.deleteText(range.index, range.length, 'user');
-    if (html) {
-      const clean = sanitizePasteHTML(html);
-      if (clean) q.clipboard.dangerouslyPasteHTML(range.index, clean, 'user');
-    } else {
-      q.insertText(range.index, text, 'user');
-    }
+    q.insertText(range.index, text, 'user');
+    q.setSelection(range.index + text.length, 'silent');
   }, true);
   quillInstances[id] = q;
   return q;
