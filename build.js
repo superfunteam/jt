@@ -175,12 +175,14 @@ const html = `<!DOCTYPE html>
   <section id="hero" class="section section--hero" aria-label="Introduction" data-adlib-section="hero">
     <div class="hero">
       <div class="hero__text">
+        <div>
 ${(Array.isArray(hero.intro) ? hero.intro : [hero.intro]).map((para, i) => {
   const hasMarkup = /<(em|strong|a|br)\b/.test(para);
   const typeAttr = hasMarkup ? ' data-adlib-type="richtext"' : '';
   const rendered = hasMarkup ? richEsc(para) : esc(para);
-  return `        <p class="hero__intro" data-adlib-cms="hero.intro.${i}"${typeAttr}>${rendered}</p>`;
+  return `          <p class="hero__intro" data-adlib-cms="hero.intro.${i}"${typeAttr}>${rendered}</p>`;
 }).join('\n')}
+        </div>
       </div>
 
       <div class="hero__photo">
