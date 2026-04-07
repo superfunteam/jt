@@ -624,6 +624,8 @@ function cleanQuillHTML(id) {
   html = html.replace(/^<p>/, '').replace(/<\/p>$/, '');
   html = html.replace(/<\/p><p>/g, ' ');
   html = html.replace(/<p><br><\/p>/g, '');
+  // Strip <span> tags Quill adds when pasting (e.g. background-color, color)
+  html = html.replace(/<\/?span[^>]*>/g, '');
   // Normalize Quill link output to match build.js format
   html = html.replace(/<a href="([^"]*)"[^>]*>/g, '<a href="$1" target="_blank">');
   return html.trim();
@@ -642,6 +644,8 @@ function cleanQuillHTMLMulti(id) {
     .map(p => {
       // Skip empty paragraphs
       if (p === '<br>' || p.trim() === '') return null;
+      // Strip <span> tags Quill adds when pasting
+      p = p.replace(/<\/?span[^>]*>/g, '');
       // Normalize link output
       p = p.replace(/<a href="([^"]*)"[^>]*>/g, '<a href="$1" target="_blank">');
       return p.trim();
