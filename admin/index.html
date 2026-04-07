@@ -601,6 +601,20 @@ function initQuill(id) {
     },
     placeholder: 'Enter text...'
   });
+  // Strip all formatting on paste except bold, italic, and link
+  q.clipboard.addMatcher(Node.ELEMENT_NODE, (node, delta) => {
+    delta.ops = delta.ops.map(op => {
+      if (op.attributes) {
+        const allowed = {};
+        if (op.attributes.bold) allowed.bold = true;
+        if (op.attributes.italic) allowed.italic = true;
+        if (op.attributes.link) allowed.link = op.attributes.link;
+        op.attributes = Object.keys(allowed).length ? allowed : undefined;
+      }
+      return op;
+    });
+    return delta;
+  });
   quillInstances[id] = q;
   return q;
 }
