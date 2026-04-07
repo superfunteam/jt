@@ -601,9 +601,11 @@ function initQuill(id) {
     },
     placeholder: 'Enter text...'
   });
-  // Strip all formatting on paste except bold, italic, and link
+  // Only allow text with bold, italic, and link on paste — strip everything else
   q.clipboard.addMatcher(Node.ELEMENT_NODE, (node, delta) => {
-    delta.ops = delta.ops.map(op => {
+    delta.ops = delta.ops.reduce((out, op) => {
+      // Drop non-text inserts (images, videos, etc.)
+      if (typeof op.insert !== 'string') return out;
       if (op.attributes) {
         const allowed = {};
         if (op.attributes.bold) allowed.bold = true;
@@ -611,8 +613,9 @@ function initQuill(id) {
         if (op.attributes.link) allowed.link = op.attributes.link;
         op.attributes = Object.keys(allowed).length ? allowed : undefined;
       }
-      return op;
-    });
+      out.push(op);
+      return out;
+    }, []);
     return delta;
   });
   quillInstances[id] = q;
