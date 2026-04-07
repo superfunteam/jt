@@ -627,13 +627,13 @@ function initQuill(id) {
     },
     placeholder: 'Enter text...'
   });
-  // Intercept all pastes — only allow text, bold, italic, links
+  // Intercept all pastes before Quill — only allow text, bold, italic, links
   q.root.addEventListener('paste', (e) => {
     e.preventDefault();
-    e.stopPropagation();
+    e.stopImmediatePropagation();
     const html = e.clipboardData.getData('text/html');
     const text = e.clipboardData.getData('text/plain');
-    if (!html && !text) return;
+    if (!html && !text) return; // file-only paste (screenshot) — blocked
     const range = q.getSelection(true);
     if (!range) return;
     if (range.length) q.deleteText(range.index, range.length, 'user');
@@ -643,7 +643,7 @@ function initQuill(id) {
     } else {
       q.insertText(range.index, text, 'user');
     }
-  });
+  }, true);
   quillInstances[id] = q;
   return q;
 }
