@@ -635,8 +635,8 @@ function cleanQuillHTML(id) {
   // Quill wraps everything in <p> and may split inline content across
   // multiple <p> blocks; collapse them back into one inline string.
   html = html.replace(/^<p>/, '').replace(/<\/p>$/, '');
-  html = html.replace(/<\/p><p><br><\/p>/g, '<br>');
-  html = html.replace(/<\/p><p>/g, '<br>');
+  html = html.replace(/<\/p><p>/g, ' ');
+  html = html.replace(/<p><br><\/p>/g, '');
   // Strip <span> tags Quill adds when pasting (e.g. background-color, color)
   html = html.replace(/<\/?span[^>]*>/g, '');
   // Normalize Quill link output to match build.js format
@@ -762,7 +762,11 @@ function populateForms() {
   });
 
   // Quill editors
-  loadIntoQuill('quill-hero-intro', content.hero.intro);
+  // Support both legacy string and new array format for hero intro
+  loadIntoQuill('quill-hero-intro',
+    Array.isArray(content.hero.intro)
+      ? content.hero.intro.map(p => '<p>' + p + '</p>').join('')
+      : content.hero.intro);
   // Combined synopsis: join paragraphs as separate <p> blocks
   loadIntoQuill('quill-book-synopsis',
     content.book.synopsis.map(p => '<p>' + p + '</p>').join(''));
@@ -986,7 +990,7 @@ function gatherContent() {
   });
 
   // Quill editors
-  content.hero.intro = cleanQuillHTML('quill-hero-intro');
+  content.hero.intro = cleanQuillHTMLMulti('quill-hero-intro');
   content.book.synopsis = cleanQuillHTMLMulti('quill-book-synopsis');
   content.book.mediaAssets = cleanQuillHTML('quill-book-mediaAssets');
   content.bio.paragraphs = cleanQuillHTMLMulti('quill-bio-paragraphs');
