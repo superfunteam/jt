@@ -292,6 +292,7 @@ a:hover {
 .hero__intro {
   font-size: var(--text-s);
   line-height: 2.1;
+  margin-bottom: 24px;
 }
 
 .hero__intro strong {
