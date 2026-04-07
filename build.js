@@ -34,7 +34,7 @@ function richEsc(s) {
   // Temporarily replace allowed tags with placeholders
   const allowed = [];
   let tmp = String(s).replace(
-    /<(\/?(?:strong|em|a)\b[^>]*)>/gi,
+    /<(\/?(?:strong|em|a|br)\b[^>]*)>/gi,
     (match) => {
       allowed.push(match);
       return `\x00SAFE${allowed.length - 1}\x00`;
@@ -210,7 +210,7 @@ const html = `<!DOCTYPE html>
 
         <div class="book-layout__text">
 ${book.synopsis.map((para, i) => {
-  const hasMarkup = /<(em|strong|a)\b/.test(para);
+  const hasMarkup = /<(em|strong|a|br)\b/.test(para);
   const typeAttr = hasMarkup ? ' data-adlib-type="richtext"' : '';
   const rendered = hasMarkup ? richEsc(para) : esc(para);
   return `          <p class="anim-fade" data-adlib-cms="book.synopsis.${i}"${typeAttr}>${rendered}</p>`;
@@ -248,7 +248,7 @@ ${book.synopsis.map((para, i) => {
       <div class="section__inner">
         <h2 class="section__heading anim-reveal" data-adlib-cms="bio.heading">${esc(bio.heading)}</h2>
 ${bio.paragraphs.map((para, i) => {
-  const hasMarkup = /<(em|strong|a)\b/.test(para);
+  const hasMarkup = /<(em|strong|a|br)\b/.test(para);
   const typeAttr = hasMarkup ? ' data-adlib-type="richtext"' : '';
   const rendered = hasMarkup ? richEsc(para) : esc(para);
   return `        <p class="anim-fade" data-adlib-cms="bio.paragraphs.${i}"${typeAttr}>${rendered}</p>`;
