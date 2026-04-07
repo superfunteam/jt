@@ -635,8 +635,8 @@ function cleanQuillHTML(id) {
   // Quill wraps everything in <p> and may split inline content across
   // multiple <p> blocks; collapse them back into one inline string.
   html = html.replace(/^<p>/, '').replace(/<\/p>$/, '');
-  html = html.replace(/<\/p><p>/g, ' ');
-  html = html.replace(/<p><br><\/p>/g, '');
+  html = html.replace(/<\/p><p><br><\/p>/g, '<br>');
+  html = html.replace(/<\/p><p>/g, '<br>');
   // Strip <span> tags Quill adds when pasting (e.g. background-color, color)
   html = html.replace(/<\/?span[^>]*>/g, '');
   // Normalize Quill link output to match build.js format
