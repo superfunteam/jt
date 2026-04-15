@@ -89,7 +89,7 @@
     ]
   },
   "journalism": {
-    "heading": "Journalism",
+    "heading": "Selected Journalism",
     "outlets": " ",
     "articles": [
       {
@@ -99,14 +99,14 @@
         "year": "2026"
       },
       {
-        "title": "Featured Article Title",
+        "title": "Is Anthony Weiner Ready to Go Another Round?",
         "url": "#",
         "source": "The Atlantic",
-        "year": "2022"
+        "year": "2025"
       },
       {
-        "title": "Featured Article Title",
-        "url": "#",
+        "title": "A new AI predicts when we’ll die. It says even more about how we live. ",
+        "url": "#https://www.washingtonpost.com/opinions/2024/01/15/artificial-intelligence-death-calculator/",
         "source": "The Washington Post",
         "year": "2023"
       },
@@ -127,6 +127,12 @@
         "url": "#",
         "source": "Time",
         "year": "2019"
+      },
+      {
+        "title": "",
+        "url": "",
+        "source": "",
+        "year": ""
       }
     ]
   },
