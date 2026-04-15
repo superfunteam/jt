@@ -60,28 +60,7 @@
       "1995 ...doing whatever they’ll let him do at Vibe magazine, which is joyful chaos.",
       "1994 ...a Penn grad who moves to New York City for a fact-checking job at Rolling Stone."
     ],
-    "cv": [
-      {
-        "role": "Deputy Managing Editor",
-        "org": "Time Magazine"
-      },
-      {
-        "role": "Editorial Director",
-        "org": "The Atlantic"
-      },
-      {
-        "role": "Head of Media",
-        "org": "Bloomberg"
-      },
-      {
-        "role": "Author",
-        "org": "AI for Good"
-      },
-      {
-        "role": "Founder",
-        "org": "Backstory Partners"
-      }
-    ]
+    "cv": []
   },
   "journalism": {
     "heading": "Select Journalism",
@@ -152,44 +131,7 @@
   },
   "media": {
     "heading": "Media",
-    "appearances": [
-      {
-        "title": "Podcast Appearance Title",
-        "url": "#",
-        "type": "Podcast",
-        "description": "AI for Good discussion"
-      },
-      {
-        "title": "TV Interview Title",
-        "url": "#",
-        "type": "Television",
-        "description": "AI policy & newsrooms"
-      },
-      {
-        "title": "Podcast Appearance Title",
-        "url": "#",
-        "type": "Podcast",
-        "description": "Media business & AI"
-      },
-      {
-        "title": "Conference Talk Title",
-        "url": "#",
-        "type": "Video",
-        "description": "Responsible AI development"
-      },
-      {
-        "title": "Longform Profile Title",
-        "url": "#",
-        "type": "Profile",
-        "description": "Career arc & AI reporting"
-      },
-      {
-        "title": "TV Segment Title",
-        "url": "#",
-        "type": "Television",
-        "description": "AI & democratic institutions"
-      }
-    ]
+    "appearances": []
   },
   "backstory": {
     "heading": "Backstory Partners",
