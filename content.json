@@ -93,10 +93,10 @@
     "outlets": " ",
     "articles": [
       {
-        "title": "Featured Article Title",
+        "title": "America Isn’t Ready for What AI Will Do to Jobs",
         "url": "#",
-        "source": "Bloomberg Businessweek",
-        "year": "2023"
+        "source": "The Atlantic",
+        "year": "2026"
       },
       {
         "title": "Featured Article Title",
@@ -132,7 +132,7 @@
   },
   "speaking": {
     "heading": "Speaking",
-    "description": "Josh Tyrangiel speaks on artificial intelligence, ethics, and the future of media. His keynotes blend original reporting, sharp analysis, and a sly wit honed over decades in newsrooms, writers’ rooms, and boardrooms.",
+    "description": "Josh Tyrangiel speaks on artificial intelligence, ethics, and the future of media. His keynotes blend original reporting, sharp analysis, and a sly wit forged by decades in newsrooms, writers’ rooms, and boardrooms.",
     "topics": [
       "AI & the Future of Information",
       "The Business of Media",
