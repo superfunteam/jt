@@ -37,12 +37,12 @@
     ],
     "events": [
       {
-        "name": "Book signing and Q&A with Ashlee Vance",
+        "name": "Book signing, Q&A with Ashlee Vance",
         "location": "Kepler's Books, Menlo Park",
         "date": "May 18th, 2026"
       },
       {
-        "name": "Book signing and Q&A with Jeffrey Goldberg",
+        "name": "Book signing, Q&A with Jeffrey Goldberg",
         "location": "Politics and Prose at The Wharf, Washington, DC",
         "date": "May 20th, 2026"
       }
@@ -55,15 +55,15 @@
     "paragraphs": [
       "Josh Tyrangiel is among the most esteemed and well-known journalists in America. More specifically, Tyrangiel is…",
       "2026 A staff writer at The Atlantic and a producer at Netflix. Great gigs.",
-      "2023 ...is CEO of Backstory Partners, a production company that makes all sorts of things, including TV specials with Oprah Winfrey. He also writes a column for the Washington Post about AI and sits on the board of his hometown Pulitzer Prize-winning local news startup, The Baltimore Banner.",
-      "2020 ...is COO of Kunhardt Films and executive producer of Eden Productions. He makes documentary films and series with great and talented people for Apple TV+.",
-      "2016 ...is the EVP of news at Vice. This means building an original nightly news show for HBO, with no anchor, no studio, no staff, a colorfully supportive boss, and orders from the network to, ‘Not fuck one thing up.’ It’s a blur, but there are 41 Emmy nominations, 15 trophies, a Peabody, and some world-changing journalism. There’s also a prestigious weekly series, multiple feature docs, and the arrival of gray hairs.",
-      "2009 ...is the editor of Bloomberg Businesweek. He gets too much credit for making it relevant and good and innovative and sometimes even funny. Bloomberg (the company/the guy) is grudgingly pleased and makes him chief content officer, overseeing digital, conferences, the investigative unit, radio, another magazine, and a TV network.",
-      "1999 ...is the lowest ranking editorial employee at TIME magazine. He writes 50-word obits with no byline. Gradually he gets stories about the living, the music critic job, a London post, the Person of the Year assignment, the national editor job, runs digital, and is made the #2 guy at the whole place. Perks: corporate Amex, front row seat at the AOL/Hindenburg disaster, lifelong friends.",
-      "1998 ...is a grad student in Yale’s American Studies program. Duties include reading six books a week, playing lots of pickup basketball, and hoping no one asks what 'epistemological' means.",
-      "1996 ...is pretending he knows how to write and produce MTV News. He hits the Presidential campaign trail, reports on the East Coast/West Coast rap wars, and conducts the last interview with Tupac Shakur. He wishes Viacom would give him healthcare.",
-      "1995 ...is doing whatever they’ll let him do at Vibe magazine, which is joyful chaos.",
-      "1994 ...is a Penn grad who moves to New York City for a fact-checking job at Rolling Stone."
+      "2023 ...CEO of Backstory Partners, a production company that makes all sorts of things, including TV specials with Oprah Winfrey. He also writes a column for the Washington Post about AI and sits on the board of his hometown Pulitzer Prize-winning local news startup, The Baltimore Banner.",
+      "2020 ...COO of Kunhardt Films and executive producer of Eden Productions. He makes documentary films and series with great and talented people for Apple TV+.",
+      "2016 ...the EVP of news at Vice. This means building an original nightly news show for HBO, with no anchor, no studio, no staff, a colorfully supportive boss, and orders from the network to, ‘Not fuck one thing up.’ It’s a blur, but there are 41 Emmy nominations, 15 trophies, a Peabody, and some world-changing journalism. There’s also a prestigious weekly series, multiple feature docs, and the arrival of gray hairs.",
+      "2009 ...the editor of Bloomberg Businesweek. He gets too much credit for making it relevant and good and innovative and sometimes even funny. Bloomberg (the company/the guy) is grudgingly pleased and makes him chief content officer, overseeing digital, conferences, the investigative unit, radio, another magazine, and a TV network.",
+      "1999 ...the lowest ranking editorial employee at TIME magazine. He writes 50-word obits with no byline. Gradually he gets stories about the living, the music critic job, a London post, the Person of the Year assignment, the national editor job, runs digital, and is made the #2 guy at the whole place. Perks: corporate Amex, front row seat at the AOL/Hindenburg disaster, lifelong friends.",
+      "1998 ...a grad student in Yale’s American Studies program. Duties include reading six books a week, playing lots of pickup basketball, and hoping no one asks what 'epistemological' means.",
+      "1996 ...pretending he knows how to write and produce MTV News. He hits the Presidential campaign trail, reports on the East Coast/West Coast rap wars, and conducts the last interview with Tupac Shakur. He wishes Viacom would give him healthcare.",
+      "1995 ...doing whatever they’ll let him do at Vibe magazine, which is joyful chaos.",
+      "1994 ...a Penn grad who moves to New York City for a fact-checking job at Rolling Stone."
     ],
     "cv": [
       {
@@ -90,7 +90,7 @@
   },
   "journalism": {
     "heading": "Journalism",
-    "outlets": "Bloomberg, The Atlantic, The Washington Post, The New York Times, Time",
+    "outlets": " ",
     "articles": [
       {
         "title": "Featured Article Title",
@@ -132,7 +132,7 @@
   },
   "speaking": {
     "heading": "Speaking",
-    "description": "Josh Tyrangiel speaks on artificial intelligence, ethics, and the future of media. His talks draw on three decades of experience leading newsrooms and reporting on the forces reshaping how we create, consume, and trust information.",
+    "description": "Josh Tyrangiel speaks on artificial intelligence, ethics, and the future of media. His keynotes blend original reporting, sharp analysis, and a sly wit honed over decades in newsrooms, writers’ rooms, and boardrooms.",
     "topics": [
       "AI & the Future of Information",
       "The Business of Media",
@@ -186,7 +186,7 @@
   },
   "backstory": {
     "heading": "Backstory Partners",
-    "description": "Strategic advisory and production at the intersection of media, technology, and narrative.",
+    "description": "A documentary film and television production company that also advises companies and nonprofits on narrative strategy—helping leaders translate complex ideas into stories that influence public understanding and drive meaningful change.",
     "url": "https://backstory-partners.superfun.team/",
     "logo": "assets/images/backstory-logo-dark.png"
   },
