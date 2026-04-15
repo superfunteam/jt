@@ -89,7 +89,7 @@
     ]
   },
   "journalism": {
-    "heading": "Selected Journalism",
+    "heading": "Select Journalism",
     "outlets": " ",
     "articles": [
       {
@@ -105,34 +105,40 @@
         "year": "2025"
       },
       {
+        "title": "Let AI remake the whole U.S. government (oh, and save the country)",
+        "url": "https://wapo.st/48DpFaT",
+        "source": "The Washington Post",
+        "year": "2024"
+      },
+      {
         "title": "A new AI predicts when we’ll die. It says even more about how we live. ",
-        "url": "#https://www.washingtonpost.com/opinions/2024/01/15/artificial-intelligence-death-calculator/",
+        "url": "##https://www.washingtonpost.com/opinions/2024/01/15/artificial-intelligence-death-calculator/",
+        "source": "The Washington Post",
+        "year": "2024"
+      },
+      {
+        "title": "Honestly, I love it when AI hallucinates",
+        "url": "#https://www.washingtonpost.com/opinions/2023/12/27/artificial-intelligence-hallucinations/",
         "source": "The Washington Post",
         "year": "2023"
       },
       {
-        "title": "Featured Article Title",
-        "url": "#",
+        "title": "You hate AI for all the right reasons. Now reconsider",
+        "url": "https://www.washingtonpost.com/opinions/2023/09/10/ai-future-power-imperfection-technology/",
+        "source": "The Washington Post",
+        "year": "2023"
+      },
+      {
+        "title": "How to Fix the State of the Union",
+        "url": "https://www.nytimes.com/2023/02/03/opinion/biden-state-of-the-union.html?unlocked_article_code=1.bFA.Ffgw.LRJqNOMdB5CG&smid=url-share",
         "source": "The New York Times",
-        "year": "2024"
+        "year": "2023"
       },
       {
-        "title": "Featured Article Title",
-        "url": "#",
-        "source": "Bloomberg",
+        "title": "A Quest to Reclaim a Family Home Unearths a Past Buried by the Holocaust",
+        "url": "https://www.nytimes.com/2021/03/16/books/review/plunder-menachem-kaiser.html?unlocked_article_code=1.bFA.7EnS.TSDoUduJuCaZ&smid=url-share",
+        "source": "The New York Times",
         "year": "2021"
-      },
-      {
-        "title": "Featured Article Title",
-        "url": "#",
-        "source": "Time",
-        "year": "2019"
-      },
-      {
-        "title": "",
-        "url": "",
-        "source": "",
-        "year": ""
       }
     ]
   },
