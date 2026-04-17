@@ -309,19 +309,6 @@ ${speaking.topics.map((topic, i) =>
   </section>
 
 
-  <!-- Media -->
-  <section id="media" class="section" aria-label="Media appearances" data-adlib-section="media">
-    <div class="section__inner">
-      <h2 class="section__heading anim-reveal" data-adlib-cms="media.heading">${esc(media.heading)}</h2>
-      <div class="media-list anim-fade">
-${media.appearances.map((item, i) =>
-  `        <p data-adlib-each="media.appearances" data-adlib-index="${i}"><a href="${esc(item.url)}">${esc(item.title)}</a><br>&emsp;${esc(item.type)} &mdash; ${esc(item.description)}</p>`
-).join('\n')}
-      </div>
-    </div>
-  </section>
-
-
   <!-- Backstory Partners -->
   <section id="backstory" class="section section--dark" aria-label="Backstory Partners" data-adlib-section="backstory">
     <a href="${esc(backstory.url)}" target="_blank" rel="noopener" class="section__inner backstory-link" data-adlib-cms="backstory.url" data-adlib-type="href">

@@ -362,8 +362,6 @@ blockquote {
 
 .book-praise p {
   margin-bottom: 24px;
-  font-style: italic;
-  color: var(--gray);
 }
 
 .cite {
