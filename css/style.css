@@ -549,13 +549,17 @@ blockquote {
 }
 
 .form-confirmation {
-  font-family: var(--font);
-  font-size: var(--text-s);
-  color: var(--black);
   overflow: hidden;
 }
 
 .form-confirmation__inner {
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  padding: 48px;
+  text-align: center;
+  font-family: var(--font);
+  font-size: var(--text-s);
+  color: var(--black);
   opacity: 0;
   transform: translateY(12px);
   transition: opacity 0.5s ease, transform 0.5s ease;
@@ -567,16 +571,15 @@ blockquote {
 }
 
 .form-confirmation__check {
-  display: inline-block;
-  width: 0;
+  display: block;
+  margin: 0 auto 16px;
+  width: 48px;
+  height: 48px;
   opacity: 0;
-  transition: width 0.4s ease 0.3s, opacity 0.3s ease 0.3s;
-  overflow: hidden;
-  vertical-align: middle;
+  transition: opacity 0.3s ease 0.3s;
 }
 
 .form-confirmation__inner.is-visible .form-confirmation__check {
-  width: 1.2em;
   opacity: 1;
 }
 
