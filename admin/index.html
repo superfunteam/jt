@@ -717,6 +717,13 @@ function logout() {
    LOAD CONTENT
    ============================================================ */
 async function loadContent() {
+  const pw = sessionStorage.getItem('admin_pw');
+  const verify = await fetch('/.netlify/functions/verify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ password: pw })
+  });
+  if (!verify.ok) throw new Error('Unauthorized');
   const res = await fetch('/content.json?_=' + Date.now());
   if (!res.ok) throw new Error('Failed to load content');
   content = await res.json();
