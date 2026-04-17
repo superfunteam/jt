@@ -174,7 +174,7 @@ a:hover {
 
 .nav__menu {
   display: flex;
-  gap: 32px;
+  gap: 24px;
 }
 
 .nav__link {

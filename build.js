@@ -139,7 +139,7 @@ const html = `<!DOCTYPE html>
         <option value="journalism">Journalism</option>
         <option value="speaking">Speaking</option>
         <option value="bio">Bio</option>
-        <option value="backstory">Backstory</option>
+        <option value="backstory">Backstory Partners</option>
         <option value="contact">Contact</option>
       </select>
 
@@ -148,7 +148,7 @@ const html = `<!DOCTYPE html>
         <li><a href="/journalism" class="nav__link" data-section="journalism">Journalism</a></li>
         <li><a href="/speaking" class="nav__link" data-section="speaking">Speaking</a></li>
         <li><a href="/bio" class="nav__link" data-section="bio">Bio</a></li>
-        <li><a href="/backstory" class="nav__link" data-section="backstory">Backstory</a></li>
+        <li><a href="/backstory" class="nav__link" data-section="backstory">Backstory Partners</a></li>
         <li><a href="/contact" class="nav__link" data-section="contact">Contact</a></li>
       </ul>
     </nav>
@@ -161,7 +161,7 @@ const html = `<!DOCTYPE html>
       <li><a href="/journalism" class="nav-overlay__link" data-section="journalism">Journalism</a></li>
       <li><a href="/speaking" class="nav-overlay__link" data-section="speaking">Speaking</a></li>
       <li><a href="/bio" class="nav-overlay__link" data-section="bio">Bio</a></li>
-      <li><a href="/backstory" class="nav-overlay__link" data-section="backstory">Backstory</a></li>
+      <li><a href="/backstory" class="nav-overlay__link" data-section="backstory">Backstory Partners</a></li>
       <li><a href="/contact" class="nav-overlay__link" data-section="contact">Contact</a></li>
     </ul>
   </div>
