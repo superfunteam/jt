@@ -86,7 +86,7 @@ const html = `<!DOCTYPE html>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <!-- Styles -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=${Date.now()}">
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -379,7 +379,7 @@ ${speaking.topics.map((topic, i) =>
   <script src="js/smooth-scroll.js"></script>
   <script src="js/navigation.js"></script>
   <script src="js/animations.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=${Date.now()}"></script>
 
 
 </body>
