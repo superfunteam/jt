@@ -136,20 +136,18 @@ const html = `<!DOCTYPE html>
       <select class="nav__select" aria-label="Jump to section">
         <option value="hero">Top</option>
         <option value="book">Book</option>
-        <option value="bio">Bio</option>
         <option value="journalism">Journalism</option>
         <option value="speaking">Speaking</option>
-        <option value="media">Media</option>
+        <option value="bio">Bio</option>
         <option value="backstory">Backstory</option>
         <option value="contact">Contact</option>
       </select>
 
       <ul id="nav-menu" class="nav__menu" role="list">
         <li><a href="/book" class="nav__link" data-section="book">Book</a></li>
-        <li><a href="/bio" class="nav__link" data-section="bio">Bio</a></li>
         <li><a href="/journalism" class="nav__link" data-section="journalism">Journalism</a></li>
         <li><a href="/speaking" class="nav__link" data-section="speaking">Speaking</a></li>
-        <li><a href="/media" class="nav__link" data-section="media">Media</a></li>
+        <li><a href="/bio" class="nav__link" data-section="bio">Bio</a></li>
         <li><a href="/backstory" class="nav__link" data-section="backstory">Backstory</a></li>
         <li><a href="/contact" class="nav__link" data-section="contact">Contact</a></li>
       </ul>
@@ -160,10 +158,9 @@ const html = `<!DOCTYPE html>
   <div class="nav-overlay" aria-hidden="true">
     <ul class="nav-overlay__menu" role="list">
       <li><a href="/book" class="nav-overlay__link" data-section="book">Book</a></li>
-      <li><a href="/bio" class="nav-overlay__link" data-section="bio">Bio</a></li>
       <li><a href="/journalism" class="nav-overlay__link" data-section="journalism">Journalism</a></li>
       <li><a href="/speaking" class="nav-overlay__link" data-section="speaking">Speaking</a></li>
-      <li><a href="/media" class="nav-overlay__link" data-section="media">Media</a></li>
+      <li><a href="/bio" class="nav-overlay__link" data-section="bio">Bio</a></li>
       <li><a href="/backstory" class="nav-overlay__link" data-section="backstory">Backstory</a></li>
       <li><a href="/contact" class="nav-overlay__link" data-section="contact">Contact</a></li>
     </ul>
@@ -224,7 +221,7 @@ ${book.synopsis.map((para, i) => {
 }).join('\n\n')}
 
           <div class="book-praise anim-fade">
-            <p data-adlib-cms="book.praise">${esc(book.praise)}</p>
+            <p data-adlib-cms="book.praise" data-adlib-type="richtext">${richEsc(book.praise)}</p>
           </div>
 
           <p class="book-buy anim-fade">

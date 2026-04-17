@@ -406,6 +406,10 @@ blockquote {
   margin-bottom: 24px;
 }
 
+.article-list p a {
+  font-weight: 700;
+}
+
 
 /* ── Bio Layout ──────────────────────────────────────────── */
 

@@ -375,7 +375,7 @@
         </div>
         <div class="field">
           <label>Press Praise</label>
-          <textarea data-field="book.praise"></textarea>
+          <div class="quill-wrap" id="quill-book-praise"></div>
         </div>
         <h3 class="dyn-heading">Buy Links</h3>
         <div id="buyLinks-container"></div>
@@ -770,6 +770,7 @@ function populateForms() {
   // Combined synopsis: join paragraphs as separate <p> blocks
   loadIntoQuill('quill-book-synopsis',
     content.book.synopsis.map(p => '<p>' + p + '</p>').join(''));
+  loadIntoQuill('quill-book-praise', content.book.praise);
   loadIntoQuill('quill-book-mediaAssets', content.book.mediaAssets);
   // Combined bio: join paragraphs as separate <p> blocks
   loadIntoQuill('quill-bio-paragraphs',
@@ -992,6 +993,7 @@ function gatherContent() {
   // Quill editors
   content.hero.intro = cleanQuillHTMLMulti('quill-hero-intro');
   content.book.synopsis = cleanQuillHTMLMulti('quill-book-synopsis');
+  content.book.praise = cleanQuillHTML('quill-book-praise');
   content.book.mediaAssets = cleanQuillHTML('quill-book-mediaAssets');
   content.bio.paragraphs = cleanQuillHTMLMulti('quill-bio-paragraphs');
   content.speaking.inquiryCta = cleanQuillHTML('quill-speaking-inquiryCta');
